@@ -1,8 +1,8 @@
-module com.criminalsys.crimemanagementsys {
+module com.sevenatseven {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.criminalsys.crimemanagementsys to javafx.fxml;
-    exports com.criminalsys.crimemanagementsys;
+    opens com.sevenatseven to javafx.fxml;
+    exports com.sevenatseven;
 }

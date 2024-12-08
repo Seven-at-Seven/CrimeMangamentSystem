@@ -1,5 +1,9 @@
 # CrimeManagmentSystem
 
+## Donot Forget to install jdk 19 instead of your current version 
+1. file -> Project Structure -> SDK -> Choose 19 -> Apply ->Ok
+
+
 ## If you have intelij
 1. new -> project from version control -> choose git if not choosen
 2. paste `https://github.com/Seven-at-Seven/CrimeMangamentSystem`

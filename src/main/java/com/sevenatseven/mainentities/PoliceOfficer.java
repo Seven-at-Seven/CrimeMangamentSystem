@@ -5,6 +5,7 @@ public class PoliceOfficer extends Person {
     private int salary;
     private String rank;
     private String BadgeNumber;
+    private Department department;
 
     PoliceOfficer (String firstName, String lastName,String nationalId, String phoneNumber, int salary, String rank,String BadgeNumber) {
         super(firstName, lastName, nationalId);
@@ -13,6 +14,11 @@ public class PoliceOfficer extends Person {
     this.BadgeNumber = BadgeNumber;
     }
 
+    /**
+     *
+     * @param salary  The updated Salary
+     * @param isAdmin Only salary can be updated by the admin
+     */
     public void setSalary (int salary,boolean isAdmin) {
        if (isAdmin)this.salary = salary;
     }
@@ -21,7 +27,11 @@ public class PoliceOfficer extends Person {
     }
 
 
-
+    /**
+     *
+     * @param rank     The updated rank
+     * @param isAdmin  Admin only who can update the rank
+     */
     public void setRank (String rank,boolean isAdmin) {
         if (isAdmin)this.rank = rank;
     }
@@ -29,5 +39,7 @@ public class PoliceOfficer extends Person {
         return rank;
     }
 
-
+    public Department getDepartment () {
+        return department;
+    }
 }

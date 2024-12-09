@@ -6,10 +6,11 @@ public class PoliceOfficer extends Person {
     private String rank;
     private Department department;
 
-    PoliceOfficer (String firstName, String lastName,String nationalId,String id, String phoneNumber, int salary, String rank) {
+    PoliceOfficer (String firstName, String lastName,String id,String nationalId,  int salary,String phoneNumber, String rank) {
         super(firstName, lastName,id, nationalId);
         this.salary = salary;
         this.phoneNumber = phoneNumber;
+        this.rank = rank;
 
     }
 

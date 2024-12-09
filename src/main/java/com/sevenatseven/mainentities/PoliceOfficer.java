@@ -1,4 +1,4 @@
-package com.sevenatseven.mainentities;
+package com.sevenatseven.mainEntities;
 
 public class PoliceOfficer extends Person {
     private String phoneNumber;

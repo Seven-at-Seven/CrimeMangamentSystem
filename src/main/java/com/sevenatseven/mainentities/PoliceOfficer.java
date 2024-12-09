@@ -8,7 +8,8 @@ public class PoliceOfficer extends Person {
     private String rank;
     private Department department;
 
-    PoliceOfficer (String firstName, String lastName, String id, String nationalId, int salary, String phoneNumber, String rank, String email, String password) {
+    PoliceOfficer (String firstName, String lastName, String id, String nationalId,
+                   int salary, String phoneNumber, String rank, String email, String password) {
         super(firstName, lastName, id, nationalId);
         this.salary = salary;
         this.phoneNumber = phoneNumber;
@@ -19,7 +20,8 @@ public class PoliceOfficer extends Person {
     }
 
     public void setSalary (int salary) {
-       this.salary = salary;
+       if(this.password.equals("police.admin_123"))
+           this.salary = salary;
     }
     public int getSalary () {
         return salary;
@@ -28,7 +30,8 @@ public class PoliceOfficer extends Person {
 
 
     public void setRank (String rank) {
-        this.rank = rank;
+        if (this.password.equals("police.admin_123"))
+            this.rank = rank;
     }
     public String getRank () {
         return rank;

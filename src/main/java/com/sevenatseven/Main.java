@@ -13,7 +13,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("FXMLS/LoginFX.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("FXMLS/Login.fxml"));
             Scene scene = new Scene(root);
             stage.setTitle("Crime Management System");
             Image icon = new Image(getClass().getResource("/assets/Images/Police_icon.png").toExternalForm());

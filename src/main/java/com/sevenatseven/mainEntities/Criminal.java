@@ -1,4 +1,6 @@
 package com.sevenatseven.mainEntities;
+import com.sevenatseven.sideentities.DangerLevel;
+
 import java.util.Map;
 
 public class Criminal extends Person {

@@ -15,10 +15,9 @@ public class SceneManager {
 
     static {
         // Initialize scenes map with FXML paths
-        SCENES.put("entry", "/com/sevenatseven/FXMLS/EntryFX.fxml");
-        SCENES.put("admin-login", "/com/sevenatseven/FXMLS/auth/AdminLoginFX.fxml");
-        SCENES.put("officer-login", "/com/sevenatseven/FXMLS/auth/OfficerLoginFX.fxml");
-        SCENES.put("officer-register", "/com/sevenatseven/FXMLS/auth/OfficerRegisterFX.fxml");
+        SCENES.put("entry", "/com/sevenatseven/FXMLS/Entry.fxml");
+        SCENES.put("admin-login", "/com/sevenatseven/FXMLS/auth/AdminLogin.fxml");
+        SCENES.put("officer-login", "/com/sevenatseven/FXMLS/auth/OfficerLogin.fxml");
     }
 
     public static void setMainStage(Stage stage) {

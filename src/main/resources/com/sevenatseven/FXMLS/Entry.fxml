@@ -11,6 +11,6 @@
 
     <Label fx:id="label" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" text="Entry sence" />
     <Button fx:id="adminLoginLink" layoutX="61.0" layoutY="176.0" mnemonicParsing="false" onAction="#goToAdminLogin" text="Login as admin" />
-    <Button fx:id="officerLoginLink" layoutX="161.0" layoutY="176.0" mnemonicParsing="false" onAction="#goToOfficerLogin" text="Login as officer" />
+    <Button fx:id="officerLoginLink" layoutX="261.0" layoutY="176.0" mnemonicParsing="false" onAction="#goToOfficerLogin" text="Login as officer" />
 
 </AnchorPane>

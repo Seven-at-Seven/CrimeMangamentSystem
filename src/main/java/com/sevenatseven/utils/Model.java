@@ -16,15 +16,28 @@ public class Model {
     private String customDataDir = null;
     private final String DATA_DIR = "src/main/resources/data/";
 
+    /**
+     * Constructs a Model with the specified model name.
+     * @param modelName the name of the model
+     */
     public Model(String modelName) {
         this.modelName = modelName;
     }
 
+    /**
+     * Constructs a Model with the specified model name and custom data directory.
+     * @param modelName the name of the model
+     * @param customDataDir the custom directory for data storage
+     */
     public Model(String modelName, String customDataDir) {
         this.modelName = modelName;
         this.customDataDir = customDataDir;
     }
 
+    /**
+     * Gets the file path for the model data.
+     * @return the file path as a String
+     */
     private String getFilePath() {
         if(customDataDir != null) {
             return customDataDir + modelName + ".txt";
@@ -33,12 +46,12 @@ public class Model {
     }
 
     /**
-     * Get a record from the file
-     * @param recordId the id of the record to get
-     * @return the record
-     * @throws IOException if the file is not found
+     * Retrieves a record from the file by its ID.
+     * @param recordId the ID of the record to retrieve
+     * @return the record as a String, or null if not found
+     * @throws IOException if an I/O error occurs
      */
-    public  String getRecordAt(String recordId) throws IOException {
+    public String getRecordAt(String recordId) throws IOException {
         String filePath = getFilePath();
         File file = new File(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -57,9 +70,9 @@ public class Model {
     }
 
     /**
-     * Get all records from the file
-     * @return a list of all records
-     * @throws IOException if the file is not found
+     * Retrieves all records from the file.
+     * @return a List of all records
+     * @throws IOException if an I/O error occurs
      */
     public List<String> getAllRecords() throws IOException {
         String filePath = getFilePath();
@@ -78,10 +91,10 @@ public class Model {
     }
 
     /**
-     * Update a record at a given recordId with the new data
-     * @param recordId the id of the record to update
+     * Updates a record at the specified ID with new data.
+     * @param recordId the ID of the record to update
      * @param data the new data to update the record with
-     * @throws IOException if the file is not found
+     * @throws IOException if an I/O error occurs
      */
     public void updateRecordAt(String recordId, String data) throws IOException {
         String filePath = getFilePath();
@@ -109,6 +122,10 @@ public class Model {
         }
     }
 
+    /**
+     * Saves a new record to the file.
+     * @param data the data to save as a new record
+     */
     public void saveRecord(String data) {
         String filePath = getFilePath();
         File file = new File(filePath);
@@ -120,6 +137,10 @@ public class Model {
         }
     }
 
+    /**
+     * Deletes a record from the file by its ID.
+     * @param recordId the ID of the record to delete
+     */
     public void deleteRecordAt(String recordId) {
         String filePath = getFilePath();
         File file = new File(filePath);

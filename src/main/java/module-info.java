@@ -1,7 +1,6 @@
 module com.sevenatseven {
     requires javafx.controls;
     requires javafx.fxml;
-    requires transitive javafx.graphics;
 
     exports com.sevenatseven;
     exports com.sevenatseven.controllers.auth;

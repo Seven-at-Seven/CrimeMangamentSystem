@@ -20,7 +20,7 @@ public class PoliceOfficer extends Person {
     }
 
     public void setSalary (int salary) {
-       if(this.password.equals("police.admin_123"))
+
            this.salary = salary;
     }
     public int getSalary () {
@@ -30,7 +30,7 @@ public class PoliceOfficer extends Person {
 
 
     public void setRank (String rank) {
-        if (this.password.equals("police.admin_123"))
+
             this.rank = rank;
     }
     public String getRank () {

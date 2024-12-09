@@ -1,24 +1,22 @@
 package com.sevenatseven;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import com.sevenatseven.utils.SceneManager;
 
 import java.io.IOException;
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        stage.setTitle("Crime Management System");
+        SceneManager.setMainStage(stage);
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/sevenatseven/FXMLS/LoginFX.fxml"));
-            Scene scene = new Scene(root);
-            stage.setTitle("Crime Management System");
             Image icon = new Image(getClass().getResource("/assets/Images/Police_icon.png").toExternalForm());
             stage.getIcons().add(icon);
-            stage.setScene(scene);
+            SceneManager.switchScene("entry");
             stage.show();
         }
         catch (IOException ex) {
@@ -27,6 +25,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

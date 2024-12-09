@@ -1,8 +1,10 @@
 module com.sevenatseven {
     requires javafx.controls;
     requires javafx.fxml;
+    requires transitive javafx.graphics;
 
     exports com.sevenatseven;
-    opens com.sevenatseven to javafx.fxml;
+    exports com.sevenatseven.controllers.auth;
     opens com.sevenatseven.controllers to javafx.fxml;
+    opens com.sevenatseven to javafx.fxml;
 }

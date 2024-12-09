@@ -8,7 +8,9 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.sevenatseven.controllers.LoginController"
+            fx:controller="com.sevenatseven.controllers.auth.OfficerLoginController"
             prefHeight="400.0" prefWidth="600.0">
+
+    <Label fx:id="label" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" text="Login sence" />
 
 </AnchorPane>

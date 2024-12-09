@@ -1,6 +1,8 @@
-package com.sevenatseven.mainEntities;
+package com.sevenatseven.mainentities;
+import com.sevenatseven.sideEntities.DangerLevel;
+
 import java.util.Map;
-import DangerLevel;
+
 
 public class Criminal extends Person {
     private String current_location;

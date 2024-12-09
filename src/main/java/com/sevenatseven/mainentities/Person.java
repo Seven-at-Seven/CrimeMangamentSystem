@@ -1,4 +1,4 @@
-package com.sevenatseven.mainEntities;
+package com.sevenatseven.mainentities;
 
 abstract public class Person { // will use the setters for updating
     private String firstName;

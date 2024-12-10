@@ -1,15 +1,16 @@
 package com.sevenatseven;
 
+import com.sevenatseven.utils.SceneManager;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import com.sevenatseven.utils.SceneManager;
 
-import java.io.IOException;
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        // set the window dimensions
         stage.setTitle("Crime Management System");
         SceneManager.setMainStage(stage);
 

@@ -21,7 +21,12 @@ public class Model {
      * @param modelName the name of the model
      */
     public Model(String modelName) {
-        this.modelName = modelName;
+        // if modelName is single word, add "s" to the end
+        if (modelName.split("\\s+").length != 1) {
+            this.modelName = modelName + "s";
+        } else {
+            this.modelName = modelName;
+        }
     }
 
     /**
@@ -30,7 +35,11 @@ public class Model {
      * @param customDataDir the custom directory for data storage
      */
     public Model(String modelName, String customDataDir) {
-        this.modelName = modelName;
+        if (modelName.split("\\s+").length != 1) {
+            this.modelName = modelName + "s";
+        } else {
+            this.modelName = modelName;
+        }
         this.customDataDir = customDataDir;
     }
 
@@ -57,8 +66,30 @@ public class Model {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] words = line.split("\\s+");
+                String[] words = line.split(":");
                 if (words.length > 0 && words[0].equals(recordId)) {
+                    return line;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
+    }
+    /**
+     * Retrieves a record from the file by its email.
+     * @param email the email of the record to retrieve
+     * @return the record as a String, or null if not found
+     * @throws IOException if an I/O error occurs
+     */
+    public String getRecordByEmail(String email) throws IOException {
+        String filePath = getFilePath();
+        File file = new File(filePath);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains(email)) {
                     return line;
                 }
             }
@@ -105,7 +136,7 @@ public class Model {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] words = line.split("\\s+");
+                String[] words = line.split(":");
                 if (words.length > 0 && words[0].equals(recordId)) {
                     line = data; // Update the line with new data
                 }
@@ -148,7 +179,7 @@ public class Model {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] words = line.split("\\s+");
+                String[] words = line.split(":");
                 if (words.length == 0 || !words[0].equals(recordId)) {
                     lines.add(line);
                 }

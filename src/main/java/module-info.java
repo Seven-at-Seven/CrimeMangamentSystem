@@ -7,4 +7,5 @@ module com.sevenatseven {
     exports com.sevenatseven.controllers.auth;
     opens com.sevenatseven.controllers to javafx.fxml;
     opens com.sevenatseven to javafx.fxml;
+    opens com.sevenatseven.controllers.auth to javafx.fxml;
 }

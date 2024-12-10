@@ -2,6 +2,7 @@ module com.sevenatseven {
     requires javafx.controls;
     requires javafx.fxml;
     requires rt;
+    requires jfxrt;
 
     exports com.sevenatseven;
     exports com.sevenatseven.controllers.auth;

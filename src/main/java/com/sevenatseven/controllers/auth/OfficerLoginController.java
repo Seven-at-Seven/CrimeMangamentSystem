@@ -46,6 +46,6 @@ public class OfficerLoginController extends BaseLoginController {
         alert.showAndWait();
 
         Shared.setOfficerString(this.officerString);
-        SceneManager.switchScene("entry");
+        SceneManager.switchScene("officer-home");
     }
 }

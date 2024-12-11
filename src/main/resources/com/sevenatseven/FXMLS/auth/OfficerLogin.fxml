@@ -5,10 +5,46 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-    xmlns:fx="http://javafx.com/fxml" fx:controller="com.sevenatseven.controllers.auth.OfficerLoginController" prefHeight="400.0" prefWidth="600.0">
+<VBox spacing="10"
+    xmlns="http://javafx.com/javafx"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="com.sevenatseven.controllers.auth.OfficerLoginController"
+    prefHeight="400.0" prefWidth="600.0">
 
-    <Label fx:id="label" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" text="Officer Login sence" />
 
-</AnchorPane>
+    <!-- Breadcrumb -->
+    <HBox spacing="5" alignment="CENTER_LEFT">
+        <Hyperlink onAction="#goBack" text="Home" />
+        <Label text=">" />
+        <Label text="Officer Login" />
+        <padding>
+            <Insets bottom="20" />
+        </padding>
+    </HBox>
+
+    <padding>
+        <Insets bottom="40" left="40" right="40" top="40" />
+    </padding>
+
+
+    <VBox alignment="CENTER" prefHeight="676.0" prefWidth="742.0" spacing="20.0"
+        stylesheets="@../../styles/components/input-field.css">
+
+        <padding>
+            <Insets bottom="40" left="40" right="40" top="40" />
+        </padding>
+
+        <Label style="-fx-font-size: 24px;" text="Officer Login" textFill="#5b31f2" />
+
+        <TextField fx:id="emailField" maxWidth="300" promptText="Email" />
+
+        <PasswordField fx:id="passwordField" maxWidth="300" promptText="Password" />
+
+        <Button onAction="#handleLogin"
+            stylesheets="@../../styles/components/green-button.css" text="Login" />
+    </VBox>
+
+
+</VBox>

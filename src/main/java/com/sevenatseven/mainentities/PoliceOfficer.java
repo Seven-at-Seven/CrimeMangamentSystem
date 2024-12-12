@@ -8,20 +8,19 @@ public class PoliceOfficer extends Person {
     private String rank;
     private Department department;
 
-    PoliceOfficer (String firstName, String lastName, String id, String nationalId,
-                   int salary, String phoneNumber, String rank, String email, String password) {
-        super(firstName, lastName, id, nationalId);
-        this.salary = salary;
-        this.phoneNumber = phoneNumber;
-        this.rank = rank;
-        this.email = email;
-        this.password = password;
-
+    public PoliceOfficer(String data) {
+        this(data.split(":"));
     }
 
-    public void setSalary (int salary) {
+    private PoliceOfficer(String[] parts) {
+        super(parts[3], parts[4], parts[0], parts[5]); // firstName, lastName, id, nationalId
+        this.email = parts[1]; // email
+        this.password = parts[2]; // password
+        this.salary = Integer.parseInt(parts[6]); // salary
+        this.phoneNumber = parts[7]; // phoneNumber
+        this.rank = parts[8]; // rank
+        this.department.id = parts[9];
 
-           this.salary = salary;
     }
     public int getSalary () {
         return salary;

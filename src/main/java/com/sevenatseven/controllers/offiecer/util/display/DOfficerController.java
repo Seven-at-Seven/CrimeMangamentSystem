@@ -4,7 +4,7 @@ import com.sevenatseven.mainEntities.PoliceOfficer;
 
 public class DOfficerController {
 
-    public void goTodisplayAllInfo(javafx.event.ActionEvent actionEvent) {
-        // display all info logic
+    public void goToDisplayCases(javafx.event.ActionEvent actionEvent) {
+        return Shared.PoliceOfficer
     }
 }

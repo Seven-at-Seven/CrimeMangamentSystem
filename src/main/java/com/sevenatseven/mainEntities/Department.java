@@ -1,0 +1,74 @@
+package com.sevenatseven.mainEntities;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Department {
+    private final String name;
+    private final int id;
+    private final Date activationDate;
+    private final ArrayList<Officer> officers; // Array of officers
+    private final ArrayList<Case> cases;       // Array of cases
+
+    // Constructor: Initializes name, id, activationDate, and arrays
+    public Department(String name, int id, Date activationDate) {
+        this.name = name;
+        this.id = id;
+        this.activationDate = activationDate;
+        this.officers = new ArrayList<>();
+        this.cases = new ArrayList<>();
+    }
+
+    // 1. Function to add an officer
+    public void addOfficer(Officer officer) {
+        officers.add(officer);
+    }
+
+    // 2. Function to return all officers
+    public ArrayList<Officer> getOfficers() {
+        return officers;
+    }
+
+    // 3. Function to add a case
+    public void addCase(Case crimeCase) {
+        cases.add(crimeCase);
+    }
+
+    // 4. Function to return all cases
+    public ArrayList<Case> getCases() {
+        return cases;
+    }
+
+    // 5. Function to return a case by ID
+    public Case getCaseById(int caseId) {
+        for (Case crimeCase : cases) {
+            if (crimeCase.getId() == caseId) { // Assuming Case has getId()
+                return crimeCase;
+            }
+        }
+        return null; // Return null if case is not found
+    }
+
+    // 6. Function to return an officer by ID
+    public Officer getOfficerById(int officerId) {
+        for (Officer officer : officers) {
+            if (officer.getId() == officerId) { // Assuming Officer has getId()
+                return officer;
+            }
+        }
+        return null; // Return null if officer is not found
+    }
+
+    // Getters for department attributes
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Date getActivationDate() {
+        return activationDate;
+    }
+}

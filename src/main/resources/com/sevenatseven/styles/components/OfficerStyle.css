@@ -1,0 +1,23 @@
+/* OfficerStyle.css */
+.root {
+    -fx-background-color: #f7f9fc;
+}
+
+.main-container {
+    -fx-padding: 50px;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 0);
+    -fx-border-color: #d1d9e6;
+    -fx-border-width: 1px;
+}
+
+.welcome-label {
+    -fx-text-fill: #34495e;
+    -fx-font-weight: bold;
+    -fx-background-color: #ffffff;
+    -fx-cursor: default;
+    -fx-font-size: 35px;
+    -fx-alignment: top-left;
+    -fx-translate-y: -50px; /* Move the label 20px higher */
+}

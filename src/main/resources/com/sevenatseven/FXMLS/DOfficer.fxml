@@ -6,18 +6,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../styles/components/OfficerStyle.css,@../styles/components/green-button.css" fx:controller="com.sevenatseven.controllers.offiecer.util.display.DOfficerController">
-   <VBox spacing="20.0" alignment="CENTER" styleClass="main-container">
-      <Label fx:id="welcomeLabel" text="Welcome, Officer Name" styleClass="welcome-label">
+<StackPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/components/OfficerStyle.css,@../styles/components/green-button.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevenatseven.controllers.offiecer.util.display.DOfficerController">
+   <VBox alignment="CENTER" spacing="20.0" styleClass="main-container">
+      <Label fx:id="welcomeLabel" prefHeight="51.0" prefWidth="718.0" styleClass="welcome-label" text="Welcome, Officer Name">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <VBox spacing="20.0" alignment="CENTER">
-         <Button text="Display Officer Info" styleClass="button" />
-         <Button text="Display Cases" styleClass="button" />
-         <Button text="Display Criminals" styleClass="button" />
-         <Button text="Add Criminals" styleClass="button" />
+      <VBox alignment="CENTER" prefHeight="305.0" prefWidth="698.0" spacing="20.0">
+         <Button prefHeight="46.0" prefWidth="177.0" styleClass="button" text=" Officer Info" />
+         <Button prefHeight="46.0" prefWidth="177.0" styleClass="button" text=" Cases" />
+         <Button prefHeight="46.0" prefWidth="178.0" styleClass="button" text=" Criminals" />
+         <Button prefHeight="46.0" prefWidth="177.0" styleClass="button" text="Add Cases" />
       </VBox>
    </VBox>
 </StackPane>

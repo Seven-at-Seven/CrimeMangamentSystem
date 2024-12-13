@@ -19,5 +19,5 @@
     -fx-cursor: default;
     -fx-font-size: 35px;
     -fx-alignment: top-left;
-    -fx-translate-y: -50px; /* Move the label 20px higher */
+    -fx-translate-y: -50px; /* Move the label 50px higher */
 }

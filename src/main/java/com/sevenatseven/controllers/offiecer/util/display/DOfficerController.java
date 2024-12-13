@@ -5,6 +5,6 @@ import com.sevenatseven.mainEntities.PoliceOfficer;
 public class DOfficerController {
 
     public void goToDisplayCases(javafx.event.ActionEvent actionEvent) {
-        return Shared.PoliceOfficer
+        // return Shared.PoliceOfficer //
     }
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox fx:id="Layout" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" spacing="35.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevenatseven.controllers.admin.util.AddController">
+   <children>
+      <Label alignment="CENTER" prefHeight="18.0" prefWidth="854.0" text="Add New Entry">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="65.0" prefWidth="800.0" spacing="60.0">
+         <children>
+            <Label prefHeight="18.0" prefWidth="95.0" text="Select Type">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="EntityAddBox" prefWidth="150.0" />
+         </children>
+      </HBox>
+      <Label alignment="CENTER" prefHeight="24.0" prefWidth="800.0" text="Entry Details">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <GridPane fx:id="DetailsGrid" prefHeight="12.0" prefWidth="800.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </GridPane>
+      <Button fx:id="AddButton" alignment="TOP_LEFT" mnemonicParsing="false" stylesheets="@../../styles/components/green-button.css" text="Confirm" />
+   </children>
+   <padding>
+      <Insets top="35.0" />
+   </padding>
+</VBox>

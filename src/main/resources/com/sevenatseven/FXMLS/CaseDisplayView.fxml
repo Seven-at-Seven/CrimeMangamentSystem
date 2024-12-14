@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.oop.project2.CaseDisplayController">
+    <VBox spacing="15" alignment="TOP_CENTER" prefWidth="600" prefHeight="500">
+        <padding>
+            <Insets top="20" right="20" left="20" bottom="20"/>
+        </padding>
+
+        <Label text="Case Details" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+        <GridPane hgap="10" vgap="10">
+            <Label text="Case ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <Label fx:id="caseIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+            <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <Label fx:id="descriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <Label text="Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <Label fx:id="startDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            <Label text="Last Update Date:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <Label fx:id="lastUpdateDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+            <Label text="Crime Type:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <Label fx:id="crimeTypeLabel" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+            <Label text="Department ID:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <Label fx:id="departmentIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+            <Label text="Officers Assigned:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+            <Label fx:id="officersIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+            <Label text="Criminals Involved:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+            <Label fx:id="criminalsIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+        </GridPane>
+
+        <Button text="Back to Cases" onAction="#backToCasesList" />
+    </VBox>
+</AnchorPane>

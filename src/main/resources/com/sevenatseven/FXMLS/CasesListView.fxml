@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.oop.project2.CasesListController">
+    <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" prefHeight="600">
+        <padding>
+            <Insets top="20" right="20" left="20" bottom="20"/>
+        </padding>
+
+        <Label text="Case Management" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+        <TableView fx:id="casesTable" prefHeight="500" prefWidth="760">
+            <columns>
+                <TableColumn text="Case ID" fx:id="caseIdColumn" prefWidth="100"/>
+                <TableColumn text="Description" fx:id="descriptionColumn" prefWidth="500"/>
+                <TableColumn text="Actions" fx:id="actionsColumn" prefWidth="160"/>
+            </columns>
+        </TableView>
+    </VBox>
+</AnchorPane>

@@ -1,6 +1,7 @@
 package com.sevenatseven.controllers.auth;
 
-import com.sevenatseven.utils.Model;
+import com.sevenatseven.controllers.auth.BaseLoginController;
+import com.sevenatseven.mainEntities.PoliceOfficer;
 import com.sevenatseven.utils.SceneManager;
 import com.sevenatseven.utils.Shared;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class OfficerLoginController extends BaseLoginController {
 
-    private String officerString;
+    private PoliceOfficer officer;
 
 
     public void goToHome(ActionEvent event) throws IOException {
@@ -20,18 +21,17 @@ public class OfficerLoginController extends BaseLoginController {
 
 
     public void handleLogin(ActionEvent event) throws IOException {
-        Model officerModel = new Model("officers");
-        officerModel.getRecordByEmail(emailField.getText());
-        if (officerModel.getRecordByEmail(emailField.getText()) == null) {
+        this.officer = Shared.getStation().getOfficerByEmail(emailField.getText());
+
+        if (officer == null) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Email not found");
             alert.showAndWait();
             return;
         }
-        this.officerString = officerModel.getRecordByEmail(emailField.getText());
 
-        if (!this.getPassword(this.officerString).equals(passwordField.getText())) {
+        if (!this.officer.getPassword().equals(passwordField.getText())) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid password");
@@ -45,7 +45,7 @@ public class OfficerLoginController extends BaseLoginController {
         alert.setHeaderText("Login successful");
         alert.showAndWait();
 
-        Shared.setOfficerString(this.officerString);
-        SceneManager.switchScene("entry");
+        Shared.setCurrentOfficer(this.officer);
+        SceneManager.switchScene("officer-home");
     }
 }

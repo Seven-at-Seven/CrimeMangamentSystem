@@ -1,6 +1,7 @@
 package com.sevenatseven.controllers;
 
-import Classes.Cases;
+import com.sevenatseven.mainEntities.Case;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 
 public class CaseDisplayController {
     @FXML private Label caseIdLabel;
@@ -20,9 +20,9 @@ public class CaseDisplayController {
     @FXML private Label officersIdLabel;
     @FXML private Label criminalsIdLabel;
 
-    private Cases currentCase;
+    private Case currentCase;
 
-    public void setCaseDetails(Cases caseToDisplay) {
+    public void setCaseDetails(Case caseToDisplay) {
         this.currentCase = caseToDisplay;
 
         caseIdLabel.setText(String.valueOf(caseToDisplay.getCaseID()));
@@ -31,8 +31,8 @@ public class CaseDisplayController {
         lastUpdateDateLabel.setText(caseToDisplay.getLastUpdateDate().toString());
         crimeTypeLabel.setText(caseToDisplay.getCrimeType());
         departmentIdLabel.setText(String.valueOf(caseToDisplay.getDepartmentID()));
-        officersIdLabel.setText(caseToDisplay.getOfficersID().toString());
-        criminalsIdLabel.setText(caseToDisplay.getCriminalsID().toString());
+        officersIdLabel.setText(caseToDisplay.getOfficersIds().toString());
+        criminalsIdLabel.setText(caseToDisplay.getCriminalsIds().toString());
     }
 
     @FXML

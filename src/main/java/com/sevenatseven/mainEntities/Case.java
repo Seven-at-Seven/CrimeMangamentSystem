@@ -1,11 +1,9 @@
 package com.sevenatseven.mainEntities;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-
+import com.sevenatseven.utils.Model;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
+
 
 public class Case {
     private final int caseID;
@@ -17,15 +15,29 @@ public class Case {
     private ArrayList<Integer> officersID;
     private ArrayList<Criminal> criminals;
 
-    public Cases(String caseData) {
-        this.caseID = caseID;
-        this.description = description;
+    public Case(String caseData) {
+        //id:description:crimeType:departmentID:officersID:criminals
+        String[] words = caseData.split(":");
+        this.caseID = Integer.parseInt(words[0]);
+        this.description = words[1];
         this.startDate = LocalDate.now();
         this.lastUpdateDate = this.startDate;
-        this.crimeType = crimeType;
-        this.departmentID = departmentID;
-        this.officersID = officersID;
-        this.criminals = criminals;
+        this.crimeType = words[2];
+        this.departmentID = Integer.parseInt(words[3]);
+
+        // officersID
+        String[] officersID = words[4].split(",");
+        this.officersID = new ArrayList<>();
+        for (String officerID : officersID) {
+            this.officersID.add(Integer.parseInt(officerID));
+        }
+        // criminals
+        String[] criminalsID = words[5].split(",");
+        this.criminals = new ArrayList<>();
+        Model model = new Model("criminals");
+        for (String criminalId : criminalsID) {
+            this.criminals.add(new Criminal(model.getRecordAt(criminalId)));
+        }
     }
     public String getDescription() {
         return description;
@@ -51,30 +63,27 @@ public class Case {
         return departmentID;
     }
 
-    public ArrayList<Integer> getOfficersID() {
+    public ArrayList<Integer> getOfficersIds() {
         return officersID;
     }
 
+    public ArrayList<Integer> getCriminalsIds() {
+        ArrayList<Integer> criminalsIds = new ArrayList<>();
+        for (Criminal criminal : criminals) {
+            criminalsIds.add(criminal.getCriminalID());
+        }
+        return criminalsIds;
+    }
     public ArrayList<Criminal> getCriminals() {
         return criminals;
     }
 
 
-
-
-
-
-    public void editCaseDetails(String newDescription, String newCrimeType, int newDepartmentID,
-                                ArrayList<Integer> newOfficersID, ArrayList<Criminal> newCriminals) {
+    public void editCaseDetails(String newDescription, String newCrimeType, int newDepartmentID) {
         this.description = newDescription;
         this.crimeType = newCrimeType;
         this.departmentID = newDepartmentID;
-        this.officersID = newOfficersID;
-        this.criminals = newCriminals;
         this.lastUpdateDate = LocalDate.now();
-
-
-
     }
 
 

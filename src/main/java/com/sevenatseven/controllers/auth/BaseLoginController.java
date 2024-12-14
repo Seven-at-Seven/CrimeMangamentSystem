@@ -1,5 +1,4 @@
 package com.sevenatseven.controllers.auth;
-
 import com.sevenatseven.controllers.BaseController;
 import com.sevenatseven.utils.SceneManager;
 import java.io.IOException;

@@ -1,6 +1,10 @@
 package com.sevenatseven.controllers;
 
-import Classes.Cases;
+import com.sevenatseven.mainEntities.Case;
+import com.sevenatseven.mainEntities.PoliceOfficer;
+import com.sevenatseven.utils.Shared;
+import java.io.IOException;
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,19 +19,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class CasesListController {
-    @FXML private TableView<Cases> casesTable;
-    @FXML private TableColumn<Cases, Integer> caseIdColumn;
-    @FXML private TableColumn<Cases, String> descriptionColumn;
-    @FXML private TableColumn<Cases, Void> actionsColumn;
+    @FXML private TableView<Case> casesTable;
+    @FXML private TableColumn<Case, Integer> caseIdColumn;
+    @FXML private TableColumn<Case, String> descriptionColumn;
+    @FXML private TableColumn<Case, Void> actionsColumn;
 
-    private final ArrayList<Cases> allCases = Cases.readCases("cases.csv");
+
+    private PoliceOfficer officer;
+    private ArrayList<Case> officerCases;
 
     @FXML
     public void initialize() {
+        this.officer = Shared.getCurrentOfficer();
+        this.officerCases = this.officer.getCases();
 
         caseIdColumn.setCellValueFactory(new PropertyValueFactory<>("caseID"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -40,7 +46,7 @@ public class CasesListController {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    Cases currentCase = getTableView().getItems().get(getIndex());
+                    Case currentCase = getTableView().getItems().get(getIndex());
 
                     Button displayButton = new Button("Display");
                     displayButton.setOnAction(event -> openDisplayView(currentCase));
@@ -55,10 +61,10 @@ public class CasesListController {
         });
 
 
-        ObservableList<Cases> observableCases = FXCollections.observableArrayList(allCases);
+        ObservableList<Case> observableCases = FXCollections.observableArrayList(this.officerCases);
         casesTable.setItems(observableCases);
     }
-    private void openDisplayView(Cases selectedCase) {
+    private void openDisplayView(Case selectedCase) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CaseDisplayView.fxml"));
             Parent root = loader.load();
@@ -74,7 +80,7 @@ public class CasesListController {
         }
     }
 
-    private void openUpdateView(Cases selectedCase) {
+    private void openUpdateView(Case selectedCase) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CaseUpdateView.fxml"));
             Parent root = loader.load();

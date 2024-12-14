@@ -1,23 +1,40 @@
 package com.sevenatseven.mainEntities;
 
+import com.sevenatseven.utils.Model;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class PoliceStation {
     private String Name;
     private String Address;
-    private ArrayList<Department> departments = new ArrayList<>();
+    private final ArrayList<Department> departments;
     public PoliceStation() {
         Name = "";
         Address = "";
-    }
-    public PoliceStation(String name, String address) {
-        Name = name;
-        Address = address;
+        departments = new ArrayList<>();
     }
     public PoliceStation(String name, String address, ArrayList<Department> departments) {
         Name = name;
         Address = address;
         this.departments = departments;
+    }
+    public PoliceStation(String name, String address) {
+        Name = name;
+        Address = address;
+        departments = new ArrayList<>();
+    }
+    public PoliceStation(String Data) throws IOException {
+        String[] data = Data.split(":");
+        Name = data[0];
+        Address = data[1];
+        String[] data2 = data[2].split(",");
+        departments = new ArrayList<>();
+        Model model = new Model("departments");
+        for (String s : data2) {
+
+            departments.add(new Department(model.getRecordAt(s)));
+        }
     }
     public String getName() {
         return Name;
@@ -46,21 +63,4 @@ public class PoliceStation {
         }
         return null;
     }
-    // get case
-//    public Case getCase(int ID){
-//        for (Department department : departments) {
-//            for(Case cases : department.getCases()) {
-//                if(cases.getID().equals(ID))return cases;
-//            }
-//        }
-//        return null;
-//    }
-//    public PoliceOfficer getOfficer(String ID) {
-//        for (Department department : departments) {
-//            for (PoliceOfficer policeOfficer : department.getOfficers()) {
-//                if(policeOfficer.getID().equals(ID))return policeOfficer;
-//            }
-//        }
-//        return null;
-//    }
 }

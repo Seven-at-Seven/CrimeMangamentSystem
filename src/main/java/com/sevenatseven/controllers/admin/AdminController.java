@@ -13,7 +13,7 @@ public class AdminController {
     private Label WelcomingLabel;
     public void initialize() {
         // will be changed when everything is implemented (policeStation.current_user)
-        WelcomingLabel.setText("Hello " + Shared.getOfficerString());
+        WelcomingLabel.setText("Hello " + "Bal7a" + "!");
     }
     @FXML
     public void SwitchToAddScene(ActionEvent event) throws IOException {

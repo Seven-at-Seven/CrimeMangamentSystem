@@ -1,10 +1,10 @@
 package com.sevenatseven.mainEntities;
 
 import com.sevenatseven.utils.Model;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 
 public class Department {
     private final int id;

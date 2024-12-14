@@ -1,13 +1,13 @@
 package com.sevenatseven.utils;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SceneManager {
     private static final Map<String, String> SCENES = new HashMap<>();
@@ -20,6 +20,7 @@ public class SceneManager {
         SCENES.put("officer-login", "/com/sevenatseven/FXMLS/auth/OfficerLogin.fxml");
         SCENES.put("admin-choice", "/com/sevenatseven/FXMLS/Admin.fxml");
         SCENES.put("add-entity", "/com/sevenatseven/FXMLS/adminUtils/Add.fxml");
+        SCENES.put("officer-home", "/com/sevenatseven/FXMLS/DOfficer.fxml");
     }
 
     public static void setMainStage(Stage stage) {
@@ -34,7 +35,7 @@ public class SceneManager {
         String fxmlPath = SCENES.get(sceneName);
         Parent root = FXMLLoader.load(SceneManager.class.getResource(fxmlPath));
         Scene scene = new Scene(root);
-        
+
         if (mainStage == null) {
             throw new IllegalStateException("Main stage not set. Call setMainStage first!");
         }

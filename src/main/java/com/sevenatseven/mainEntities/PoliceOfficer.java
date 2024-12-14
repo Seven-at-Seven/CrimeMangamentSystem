@@ -1,4 +1,6 @@
 package com.sevenatseven.mainEntities;
+import com.sevenatseven.utils.Shared;
+import java.util.ArrayList;
 
 
 public class PoliceOfficer extends Person {
@@ -7,31 +9,29 @@ public class PoliceOfficer extends Person {
   private String password;
   private int salary;
   private String rank;
-  private Department department;
+  private int departmentId;
 
   public PoliceOfficer(String data) {
     this(data.split(":"));
   }
 
   private PoliceOfficer(String[] parts) {
-    super(parts[3], parts[4], parts[0], parts[5]); // firstName, lastName, id, nationalId
+    super(parts[0], parts[3], parts[4], parts[5]); // id, firstName, lastName, nationalId
     this.email = parts[1]; // email
     this.password = parts[2]; // password
     this.salary = Integer.parseInt(parts[6]); // salary
     this.phoneNumber = parts[7]; // phoneNumber
     this.rank = parts[8]; // rank
-    this.department.id = parts[9];
+    this.departmentId = Integer.parseInt(parts[9]);
     // exmaple: 1234:name@example.com:password:1234:1234:1234:1234:1234:1234:1234
 
   }
 
   public Department getDepartment() {
-    return department;
+    return Shared.getStation().getDepartment(departmentId);
   }
 
-  public void setDepartment(Department department) {
-    this.department = department;
-  }
+
 
   public String getRank() {
     return rank;
@@ -71,5 +71,16 @@ public class PoliceOfficer extends Person {
 
   public void setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
+  }
+  public ArrayList<Case> getCases() {
+    ArrayList<Case> cases = new ArrayList<>();
+    for (Department department : Shared.getStation().getDepartments()) {
+      for (Case c : department.getCases()) {
+        if (c.getOfficersIds().contains(this.getId())) {
+          cases.add(c);
+        }
+      }
+    }
+    return cases;
   }
 }

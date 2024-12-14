@@ -1,17 +1,16 @@
 package com.sevenatseven.controllers.admin.util;
 
-import com.sevenatseven.mainEntities.*; // Import your model classes
-import com.sevenatseven.utils.Shared; // A new service class to manage entities
-
+import com.sevenatseven.mainEntities.Department;
+import com.sevenatseven.utils.Shared;
+import java.util.HashMap;
+import java.util.Map;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class AddController {
     @FXML
@@ -168,19 +167,19 @@ public class AddController {
         try {
             switch (EntityAddBox.getValue()) {
                 case "Department":
-                    entityManager.policeStation.AddDepartment(createDepartment());
+                    Shared.getStation().AddDepartment(createDepartment());
                     break;
                 case "Police Officer":
                     // Commented out method to preserve the structure
-                    //entityManager.policeStation.AddPoliceOfficer(createPoliceOfficer());
+                    //Shared.policeStation.AddPoliceOfficer(createPoliceOfficer());
                     break;
                 case "Criminal":
                     // Commented out method to preserve the structure
-                    //entityManager.policeStation.AddCriminal(createCriminal());
+                    //Shared.policeStation.AddCriminal(createCriminal());
                     break;
                 case "Case":
                     // Commented out method to preserve the structure
-                    //entityManager.policeStation.AddCase(createCase());
+                    //Shared.policeStation.AddCase(createCase());
                     break;
             }
             showAlert(Alert.AlertType.INFORMATION, "Success", "Entry added successfully!");

@@ -35,8 +35,12 @@ public class Case {
         String[] criminalsID = words[5].split(",");
         this.criminals = new ArrayList<>();
         Model model = new Model("criminals");
-        for (String criminalId : criminalsID) {
-            this.criminals.add(new Criminal(model.getRecordAt(criminalId)));
+        try {
+            for (String criminalId : criminalsID) {
+                this.criminals.add(new Criminal(model.getRecordAt(criminalId)));
+            }
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
         }
     }
     public String getDescription() {
@@ -70,7 +74,7 @@ public class Case {
     public ArrayList<Integer> getCriminalsIds() {
         ArrayList<Integer> criminalsIds = new ArrayList<>();
         for (Criminal criminal : criminals) {
-            criminalsIds.add(criminal.getCriminalID());
+            criminalsIds.add(Integer.parseInt(criminal.getId()));
         }
         return criminalsIds;
     }

@@ -1,18 +1,20 @@
 package com.sevenatseven.mainEntities;
 
 import com.sevenatseven.utils.Model;
-
 import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class PoliceStation {
     private String Name;
     private String Address;
     private final ArrayList<Department> departments;
+    private ArrayList<Admin> admins;
     public PoliceStation() {
         Name = "";
         Address = "";
         departments = new ArrayList<>();
+        admins = new ArrayList<>();
     }
     public PoliceStation(String name, String address, ArrayList<Department> departments) {
         Name = name;
@@ -28,13 +30,31 @@ public class PoliceStation {
         String[] data = Data.split(":");
         Name = data[0];
         Address = data[1];
-        String[] data2 = data[2].split(",");
+        String[] departmentsIds = data[2].split(",");
         departments = new ArrayList<>();
         Model model = new Model("departments");
-        for (String s : data2) {
-
+        for (String s : departmentsIds) {
             departments.add(new Department(model.getRecordAt(s)));
         }
+        admins = new ArrayList<>();
+        Model adminsModel = new Model("admins");
+        for (String s : adminsModel.getAllRecords()) {
+            admins.add(new Admin(adminsModel.getRecordAt(s)));
+        }
+    }
+    public PoliceOfficer getOfficerByEmail(String email) {
+        for (Department department : departments) {
+            for (PoliceOfficer officer : department.getOfficers()) {
+                if (officer.getEmail().equals(email)) return officer;
+            }
+        }
+        return null;
+    }
+    public Admin getAdminByEmail(String email) {
+        for (Admin admin : admins) {
+            if (admin.getEmail().equals(email)) return admin;
+        }
+        return null;
     }
     public String getName() {
         return Name;

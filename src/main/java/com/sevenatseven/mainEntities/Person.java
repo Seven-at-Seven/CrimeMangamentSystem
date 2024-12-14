@@ -6,18 +6,18 @@ abstract public class Person { // will use the setters for updating
     private String id;
     private String nationalID;
 
-    public Person(String firstName, String lastName, String id, String nationalID) {
+    public Person(String id,String firstName, String lastName,  String nationalID) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
         this.nationalID = nationalID;
     }
 
-    public String get_name() {
+    public String getName() {
         return firstName + " " + lastName;
     }
 
-    public String getID() {
+    public String getId() {
         return id;
     }
 
@@ -41,8 +41,8 @@ abstract public class Person { // will use the setters for updating
         return nationalID;
     }
 
-    public void setNationalId(String national_id) {
-        this.nationalID = national_id;
+    public void setNationalId(String nationalId) {
+        this.nationalID = nationalId;
     }
 }
 

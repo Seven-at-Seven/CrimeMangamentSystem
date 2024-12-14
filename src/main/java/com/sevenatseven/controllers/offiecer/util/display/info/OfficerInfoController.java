@@ -24,7 +24,7 @@ public class OfficerInfoController {
 
     @FXML
     public void initialize() {
-        PoliceOfficer loggedOfficer = getLoggedOfficer();
+        PoliceOfficer loggedOfficer = Shared.getCurrentOfficer();
         if (loggedOfficer != null) {
             firstNameLabel.setText(loggedOfficer.getFirstName());
             lastNameLabel.setText(loggedOfficer.getLastName());
@@ -32,15 +32,9 @@ public class OfficerInfoController {
             phoneNumberLabel.setText(loggedOfficer.getPhoneNumber());
             rankLabel.setText(loggedOfficer.getRank());
             salaryLabel.setText(String.valueOf(loggedOfficer.getSalary()));
-            departmentIdLabel.setText(loggedOfficer.getDepartment().id);
+            departmentIdLabel.setText(String.valueOf(loggedOfficer.getDepartment().getId()));
         }
     }
 
-    private PoliceOfficer getLoggedOfficer() {
-        String officerData = Shared.getOfficerString();
-        if (officerData != null && !officerData.isEmpty()) {
-            return new PoliceOfficer(officerData);
-        }
-        return null;
-    }
+
 }

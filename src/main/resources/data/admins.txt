@@ -1,3 +1,1 @@
-1001:John:Admin
-1002:Jane:SuperAdmin
-1003:Bob:SysAdmin
+1234:officer1@gmail.com:password1:1234:John:Doe:50000:1234567890:Sergeant:1

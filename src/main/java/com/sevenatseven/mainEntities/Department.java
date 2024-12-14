@@ -46,7 +46,7 @@ public class Department {
     }
     public void setCase(Case crimeCase) {
         for(Case c : cases){
-            if(c.getCaseID().equals(crimeCase.getCaseID())){
+            if(c.getCaseID() == crimeCase.getCaseID()){
                 cases.remove(c);
                 cases.add(crimeCase);
                 return;
@@ -73,9 +73,9 @@ public class Department {
         return cases;
     }
 
-    public PoliceOfficer getOfficerById(int officerId) {
+    public PoliceOfficer getOfficerByEmail(String email) {
         for (PoliceOfficer officer : officers) {
-            if (officer.getId().equals(officerId)) { // Assuming Officer has getId()
+            if (officer.getEmail().equals(email)) { // Assuming Officer has getId()
                 return officer;
             }
         }

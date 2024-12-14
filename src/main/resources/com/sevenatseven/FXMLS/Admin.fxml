@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.sevenatseven.controllers.admin.AdminController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevenatseven.controllers.admin.AdminController">
+   <children>
+      <Label fx:id="WelcomingLabel" alignment="CENTER" prefHeight="18.0" prefWidth="806.0" text="Hello">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" prefHeight="72.0" prefWidth="800.0" text="Choose what you want">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="193.0" prefWidth="800.0" spacing="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#SwitchToAddScene" prefHeight="40.0" prefWidth="150.0" stylesheets="@../styles/components/green-button.css" text="Add">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#SwitchToUpdateScene" prefHeight="40.0" prefWidth="150.0" stylesheets="@../styles/components/green-button.css" text="Update">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

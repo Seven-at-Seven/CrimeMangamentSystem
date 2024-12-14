@@ -18,6 +18,8 @@ public class SceneManager {
         SCENES.put("entry", "/com/sevenatseven/FXMLS/Entry.fxml");
         SCENES.put("admin-login", "/com/sevenatseven/FXMLS/auth/AdminLogin.fxml");
         SCENES.put("officer-login", "/com/sevenatseven/FXMLS/auth/OfficerLogin.fxml");
+        SCENES.put("admin-choice", "/com/sevenatseven/FXMLS/Admin.fxml");
+        SCENES.put("add-entity", "/com/sevenatseven/FXMLS/adminUtils/Add.fxml");
     }
 
     public static void setMainStage(Stage stage) {
@@ -36,7 +38,7 @@ public class SceneManager {
         if (mainStage == null) {
             throw new IllegalStateException("Main stage not set. Call setMainStage first!");
         }
-        
+
         mainStage.setScene(scene);
     }
 

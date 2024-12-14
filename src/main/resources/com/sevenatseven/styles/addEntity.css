@@ -1,0 +1,45 @@
+/* Global Styles */
+.main-background {
+    -fx-background-color: #f4f4f4;
+}
+
+.entity-choice-box {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+}
+
+.action-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+}
+
+.action-button:hover {
+    -fx-background-color: #45a049;
+}
+
+.cancel-button {
+    -fx-background-color: #f44336;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #d32f2f;
+}
+
+/* Text Field Styles */
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 3px;
+    -fx-padding: 5px;
+}
+
+.text-field:focused {
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 2px;
+}

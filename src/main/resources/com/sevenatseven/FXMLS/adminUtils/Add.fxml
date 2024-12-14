@@ -10,41 +10,34 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<VBox fx:id="Layout" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" spacing="20.0" styleClass="main-background" stylesheets="@../../styles/addEntity.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevenatseven.controllers.admin.util.AddController">
 
-<VBox fx:id="Layout" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" spacing="35.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevenatseven.controllers.admin.util.AddController">
-   <children>
-      <Label alignment="CENTER" prefHeight="18.0" prefWidth="854.0" text="Add New Entry">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <HBox alignment="CENTER" prefHeight="65.0" prefWidth="800.0" spacing="60.0">
-         <children>
-            <Label prefHeight="18.0" prefWidth="95.0" text="Select Type">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <ChoiceBox fx:id="EntityAddBox" prefWidth="150.0" />
-         </children>
-      </HBox>
-      <Label alignment="CENTER" prefHeight="24.0" prefWidth="800.0" text="Entry Details">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <GridPane fx:id="DetailsGrid" prefHeight="12.0" prefWidth="800.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-         <VBox.margin>
-            <Insets left="20.0" right="20.0" />
-         </VBox.margin>
-      </GridPane>
-      <Button fx:id="AddButton" alignment="TOP_LEFT" mnemonicParsing="false" stylesheets="@../../styles/components/green-button.css" text="Confirm" />
-   </children>
    <padding>
-      <Insets top="35.0" />
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
+
+   <Label alignment="CENTER" style="-fx-font-weight: bold;" text="Add New Entry" VBox.vgrow="NEVER">
+      <font>
+         <Font size="28.0" />
+      </font>
+   </Label>
+
+   <HBox alignment="CENTER" spacing="20.0" VBox.vgrow="NEVER">
+      <Label style="-fx-font-size: 16px;" text="Select Entity Type:" />
+      <ChoiceBox fx:id="EntityAddBox" prefWidth="250.0" styleClass="entity-choice-box" />
+   </HBox>
+
+   <Label alignment="CENTER" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Entry Details" VBox.vgrow="NEVER" />
+
+   <GridPane fx:id="DetailsGrid" alignment="CENTER" hgap="15" vgap="15" VBox.vgrow="ALWAYS">
+      <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+      </columnConstraints>
+   </GridPane>
+
+   <HBox alignment="CENTER" spacing="20.0" VBox.vgrow="NEVER">
+      <Button fx:id="AddButton" prefWidth="200.0" styleClass="action-button" text="Add Entry" />
+      <Button fx:id="CancelButton" prefWidth="200.0" styleClass="cancel-button" text="Cancel" />
+   </HBox>
 </VBox>

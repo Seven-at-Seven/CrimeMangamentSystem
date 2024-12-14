@@ -19,6 +19,7 @@ public class SceneManager {
         SCENES.put("admin-login", "/com/sevenatseven/FXMLS/auth/AdminLogin.fxml");
         SCENES.put("officer-login", "/com/sevenatseven/FXMLS/auth/OfficerLogin.fxml");
         SCENES.put("officer-home", "/com/sevenatseven/FXMLS/DOfficer.fxml");
+
     }
 
     public static void setMainStage(Stage stage) {
@@ -33,11 +34,11 @@ public class SceneManager {
         String fxmlPath = SCENES.get(sceneName);
         Parent root = FXMLLoader.load(SceneManager.class.getResource(fxmlPath));
         Scene scene = new Scene(root);
-        
+
         if (mainStage == null) {
             throw new IllegalStateException("Main stage not set. Call setMainStage first!");
         }
-        
+
         mainStage.setScene(scene);
     }
 

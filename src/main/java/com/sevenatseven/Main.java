@@ -25,7 +25,7 @@ public class Main extends Application {
         try {
             Image icon = new Image(getClass().getResource("/assets/Images/Police_icon.png").toExternalForm());
             stage.getIcons().add(icon);
-            SceneManager.switchScene("entry");
+            SceneManager.switchScene("officer-home");
             stage.show();
         }
         catch (IOException ex) {

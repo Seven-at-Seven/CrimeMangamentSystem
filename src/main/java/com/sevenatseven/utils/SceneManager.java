@@ -21,6 +21,10 @@ public class SceneManager {
         SCENES.put("admin-choice", "/com/sevenatseven/FXMLS/Admin.fxml");
         SCENES.put("add-entity", "/com/sevenatseven/FXMLS/adminUtils/Add.fxml");
         SCENES.put("officer-home", "/com/sevenatseven/FXMLS/DOfficer.fxml");
+        SCENES.put("officer-profile", "/com/sevenatseven/FXMLS/OfficerProfile.fxml");
+        SCENES.put("officer-cases", "/com/sevenatseven/FXMLS/CasesListView.fxml");
+        SCENES.put("officer-criminals", "/com/sevenatseven/FXMLS/DOfficer.fxml");
+
     }
 
     public static void setMainStage(Stage stage) {

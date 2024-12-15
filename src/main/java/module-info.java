@@ -8,6 +8,7 @@ module com.sevenatseven {
     exports com.sevenatseven.controllers.admin;
     exports com.sevenatseven.controllers.admin.util;
     exports com.sevenatseven.controllers.caseUtil;
+    exports com.sevenatseven.controllers.offiecer.util.display;
 
     opens com.sevenatseven.controllers.admin to javafx.fxml;
     opens com.sevenatseven.controllers.admin.util to javafx.fxml;
@@ -15,4 +16,5 @@ module com.sevenatseven {
     opens com.sevenatseven to javafx.fxml;
     opens com.sevenatseven.controllers.auth to javafx.fxml;
     opens com.sevenatseven.controllers.caseUtil to javafx.fxml;
+    opens com.sevenatseven.controllers.offiecer.util.display to javafx.fxml;
 }

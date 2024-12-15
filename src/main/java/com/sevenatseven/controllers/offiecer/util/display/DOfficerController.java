@@ -9,29 +9,37 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 
 public class DOfficerController {
-    @FXML
-    public Label welcomeLabel;
+//    @FXML
+//    public Label welcomeLabel;
+//
+//    @FXML
+//    public void initialize() {
+//        welcomeLabel.setText("Welcome Officer " + "Omar Hasan");
+//    }
 
-    @FXML
-    public void initialize() {
-        welcomeLabel.setText("Welcome Officer " + "Omar Hasan");
-    }
 
-    @FXML
-    public void displayCases(ActionEvent event) {
+    public void goToCases(ActionEvent event) {
         try {
-            SceneManager.switchScene("cases-view");
+            SceneManager.switchScene("officer-cases");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @FXML
-    public void displayCriminals(ActionEvent event) {
+
+    public void goToCriminals(ActionEvent event) {
         try {
-            SceneManager.switchScene("criminals-view");
+            SceneManager.switchScene("officer-criminals");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    public void goToProfile(ActionEvent event) {
+        try {
+            SceneManager.switchScene("officer-profile");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

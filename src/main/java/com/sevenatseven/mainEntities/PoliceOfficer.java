@@ -1,5 +1,7 @@
 package com.sevenatseven.mainEntities;
 import com.sevenatseven.utils.Shared;
+import javafx.scene.control.Alert;
+
 import java.util.ArrayList;
 
 
@@ -73,6 +75,7 @@ public class PoliceOfficer extends Person {
     this.phoneNumber = phoneNumber;
   }
   public ArrayList<Case> getCases() {
+    try{
     ArrayList<Case> cases = new ArrayList<>();
     for (Department department : Shared.getStation().getDepartments()) {
       for (Case c : department.getCases()) {
@@ -82,5 +85,13 @@ public class PoliceOfficer extends Person {
       }
     }
     return cases;
+    } catch (NullPointerException e) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Police Officer has no cases");
+        alert.setHeaderText("Police Officer has no cases");
+        alert.setContentText("Police Officer has no cases");
+        alert.showAndWait();
+      return new ArrayList<>();
+    }
   }
 }

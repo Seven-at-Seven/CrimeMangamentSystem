@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox spacing="10"
-    xmlns="http://javafx.com/javafx"
-    xmlns:fx="http://javafx.com/fxml"
-    fx:controller="com.sevenatseven.controllers.auth.OfficerLoginController"
-    prefHeight="400.0" prefWidth="600.0">
+<VBox prefHeight="700.0" prefWidth="800.0" spacing="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevenatseven.controllers.auth.OfficerLoginController">
 
 
     <!-- Breadcrumb -->
-    <HBox spacing="5" alignment="CENTER_LEFT">
+    <HBox alignment="CENTER_LEFT" spacing="5">
         <Hyperlink onAction="#goBack" text="Home" />
-        <Label text=">" />
+        <Label text="&gt;" />
         <Label text="Officer Login" />
         <padding>
             <Insets bottom="20" />
         </padding>
     </HBox>
 
-    <padding>
-        <Insets bottom="40" left="40" right="40" top="40" />
-    </padding>
 
-
-    <VBox alignment="CENTER" prefHeight="676.0" prefWidth="742.0" spacing="20.0"
-        stylesheets="@../../styles/components/input-field.css">
+    <VBox alignment="CENTER" prefHeight="676.0" prefWidth="742.0" spacing="20.0" stylesheets="@../../styles/components/input-field.css">
 
         <padding>
             <Insets bottom="40" left="40" right="40" top="40" />
@@ -42,9 +35,12 @@
 
         <PasswordField fx:id="passwordField" maxWidth="300" promptText="Password" />
 
-        <Button onAction="#handleLogin"
-            stylesheets="@../../styles/components/green-button.css" text="Login" />
+        <Button onAction="#handleLogin" stylesheets="@../../styles/components/green-button.css" text="Login" />
     </VBox>
+
+    <padding>
+        <Insets bottom="40" left="40" right="40" top="40" />
+    </padding>
 
 
 </VBox>

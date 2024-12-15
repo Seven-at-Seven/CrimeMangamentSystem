@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="Infinity" maxWidth="Infinity" spacing="30" style="-fx-background-color: white; -fx-padding: 40;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevenatseven.controllers.offiecer.util.display.OfficerProfileController">
+<VBox alignment="TOP_CENTER" maxHeight="Infinity" maxWidth="Infinity" prefHeight="700.0" prefWidth="800.0" spacing="30" style="-fx-background-color: white; -fx-padding: 40;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevenatseven.controllers.offiecer.util.display.OfficerProfileController">
 
     <!-- Header Label -->
     <Label style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: black;" text="Police Officer Profile" />
@@ -52,6 +52,6 @@
     </VBox>
 
     <!-- Navigation Button -->
-    <Button onAction="#goToHome" style="-fx-font-size: 16; -fx-text-fill: black; -fx-background-color: white; -fx-border-color: black;" text="Back" VBox.vgrow="NEVER" />
+    <Button onAction="#goToHome" stylesheets="@../styles/components/green-button.css" text="Back" VBox.vgrow="NEVER" />
 
 </VBox>

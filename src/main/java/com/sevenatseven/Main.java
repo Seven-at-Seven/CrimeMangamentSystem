@@ -1,8 +1,6 @@
 package com.sevenatseven;
 
 import com.sevenatseven.exceptions.RecordNotFoundException;
-import com.sevenatseven.mainEntities.Department;
-import com.sevenatseven.mainEntities.PoliceOfficer;
 import com.sevenatseven.mainEntities.PoliceStation;
 import com.sevenatseven.utils.Model;
 import com.sevenatseven.utils.SceneManager;
@@ -21,15 +19,10 @@ public class Main extends Application {
         } catch (RecordNotFoundException e) {
             System.out.println(e);
         }
-        // loop on deparments in the station
-        int i = 0;
-        for (Department department : Shared.getStation().getDepartments()) {
-            System.out.println("Department " + i + " : " + department.getName());
-            for (PoliceOfficer officer : department.getOfficers()) {
-                System.out.println("Officer " + i + " : " + officer.getName());
-            }
-            i++;
+        catch (IOException e) {
+            System.out.println(e);
         }
+
     }
     @Override
     public void start(Stage stage) throws IOException {
@@ -44,8 +37,8 @@ public class Main extends Application {
             SceneManager.switchScene("entry");
             stage.show();
         }
-        catch (IOException ex) {
-            ex.printStackTrace();
+        catch (IOException e) {
+            System.out.println(e);
         }
     }
 

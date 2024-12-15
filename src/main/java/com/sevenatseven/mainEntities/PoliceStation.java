@@ -28,7 +28,7 @@ public class PoliceStation {
         departments = new ArrayList<>();
         admins = new ArrayList<>();
     }
-    public PoliceStation(String Data) throws IOException, RecordNotFoundException {
+    public PoliceStation(String Data) throws IOException {
         String[] data = Data.split(":");
         Name = data[0];
         Address = data[1];

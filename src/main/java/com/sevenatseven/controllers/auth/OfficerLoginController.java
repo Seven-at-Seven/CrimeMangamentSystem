@@ -32,14 +32,6 @@ public class OfficerLoginController extends BaseLoginController {
             return;
         }
 
-        if (officer == null) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Email not found");
-            alert.showAndWait();
-            return;
-        }
-
         if (!this.officer.getPassword().equals(passwordField.getText())) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");

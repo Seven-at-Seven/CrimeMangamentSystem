@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
-    private void loadData() throws IOException {
+    private void loadData() {
         Model model = new Model("policeStation");
         try {
             Shared.setStation(new PoliceStation(model.getRecordAt("1")));
@@ -25,7 +25,7 @@ public class Main extends Application {
 
     }
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         loadData();
         // set the window dimensions
         stage.setTitle("Crime Management System");
@@ -40,7 +40,11 @@ public class Main extends Application {
         catch (IOException e) {
             System.out.println(e);
         }
+
     }
+@Override
+public void stop() {
+}
 
     public static void main(String[] args) {
         launch(args);

@@ -1,10 +1,10 @@
 package com.sevenatseven.mainEntities;
 
+import com.sevenatseven.exceptions.RecordNotFoundException;
 import com.sevenatseven.utils.Model;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 
 public class Department {
     private final int id;
@@ -36,12 +36,20 @@ public class Department {
         officers = new ArrayList<>();
         Model officersModel = new Model("officers");
         for(String s : data1[3].split(",")){
-            //officers.add(new PoliceOfficer(officersModel.getRecordAt(s)));
+            try {
+                officers.add(new PoliceOfficer(officersModel.getRecordAt(s)));
+            } catch (RecordNotFoundException e) {
+                System.out.println(e);
+            }
         }
         cases = new ArrayList<>();
         Model casesModel = new Model("cases");
         for(String s : data1[4].split(",")){
-            //cases.add(new Case(casesModel.getRecordAt(s)));
+            try {
+                cases.add(new Case(casesModel.getRecordAt(s)));
+            } catch (RecordNotFoundException e) {
+                System.out.println(e);
+            }
         }
     }
     public void setCase(Case crimeCase) {

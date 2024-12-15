@@ -1,6 +1,7 @@
 package com.sevenatseven.controllers.auth;
 
 import com.sevenatseven.controllers.auth.BaseLoginController;
+import com.sevenatseven.exceptions.RecordNotFoundException;
 import com.sevenatseven.mainEntities.PoliceOfficer;
 import com.sevenatseven.utils.SceneManager;
 import com.sevenatseven.utils.Shared;
@@ -21,7 +22,15 @@ public class OfficerLoginController extends BaseLoginController {
 
 
     public void handleLogin(ActionEvent event) throws IOException {
-        this.officer = Shared.getStation().getOfficerByEmail(emailField.getText());
+        try {
+            this.officer = Shared.getStation().getOfficerByEmail(emailField.getText());
+        } catch (RecordNotFoundException e) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Email not found");
+            alert.showAndWait();
+            return;
+        }
 
         if (officer == null) {
             Alert alert = new Alert(AlertType.ERROR);

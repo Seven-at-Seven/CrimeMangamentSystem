@@ -8,8 +8,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="656.0" prefWidth="901.0" stylesheets="@../../styles/components/OfficerStyle.css,@../../styles/components/green-button.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevenatseven.controllers.offiecer.util.display.DOfficerController">
-   <VBox alignment="TOP_CENTER" prefHeight="656.0" prefWidth="768.0" spacing="20.0" styleClass="main-container">
+<VBox prefHeight="656.0" prefWidth="901.0"
+   stylesheets="@../../styles/components/OfficerStyle.css,@../../styles/components/green-button.css"
+   xmlns="http://javafx.com/javafx/19.0.2.0.1" xmlns:fx="http://javafx.com/fxml/1"
+   fx:controller="com.sevenatseven.controllers.offiecer.util.display.DOfficerController">
+   <VBox alignment="TOP_CENTER" prefHeight="656.0" prefWidth="768.0" spacing="20.0"
+      styleClass="main-container">
       <Label fx:id="welcomeLabel" prefHeight="82.0" prefWidth="418.0" text="Welcome Officer ">
          <font>
             <Font size="28.0" />
@@ -26,8 +30,10 @@
       </VBox>
       <HBox alignment="CENTER" prefHeight="95.0" prefWidth="716.0" spacing="100.0">
          <children>
-            <Button onAction="#displayCriminals" prefHeight="46.0" prefWidth="178.0" styleClass="button" text=" Criminals" />
-            <Button onAction="#displayCases" prefHeight="46.0" prefWidth="160.0" styleClass="button" text=" Cases" />
+            <Button onAction="#displayCriminals" prefHeight="46.0" prefWidth="178.0"
+               styleClass="button" text=" Criminals" />
+            <Button onAction="#displayCases" prefHeight="46.0" prefWidth="160.0" styleClass="button"
+               text=" Cases" />
          </children>
          <VBox.margin>
             <Insets top="350.0" />

@@ -1,5 +1,6 @@
 package com.sevenatseven.mainEntities;
 
+import com.sevenatseven.exceptions.RecordNotFoundException;
 import com.sevenatseven.utils.Model;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ public class Case {
             }
         } catch (java.io.IOException e) {
             e.printStackTrace();
+        } catch (RecordNotFoundException e) {
+            System.out.println(e);
         }
     }
     public String getDescription() {

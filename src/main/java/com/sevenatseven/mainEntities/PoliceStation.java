@@ -1,9 +1,9 @@
 package com.sevenatseven.mainEntities;
 
+import com.sevenatseven.exceptions.RecordNotFoundException;
 import com.sevenatseven.utils.Model;
 import java.io.IOException;
 import java.util.ArrayList;
-
 
 public class PoliceStation {
     private String Name;
@@ -28,7 +28,7 @@ public class PoliceStation {
         departments = new ArrayList<>();
         admins = new ArrayList<>();
     }
-    public PoliceStation(String Data) throws IOException {
+    public PoliceStation(String Data) throws IOException, RecordNotFoundException {
         String[] data = Data.split(":");
         Name = data[0];
         Address = data[1];
@@ -36,21 +36,25 @@ public class PoliceStation {
         departments = new ArrayList<>();
         Model model = new Model("departments");
         for (String s : departmentsIds) {
-            departments.add(new Department(model.getRecordAt(s)));
+            try {
+                departments.add(new Department(model.getRecordAt(s)));
+            } catch (RecordNotFoundException e) {
+                System.out.println(e);
+            }
         }
         admins = new ArrayList<>();
         Model adminsModel = new Model("admins");
         for (String s : adminsModel.getAllRecords()) {
-            admins.add(new Admin(s));
+                admins.add(new Admin(s));
         }
     }
-    public PoliceOfficer getOfficerByEmail(String email) {
+    public PoliceOfficer getOfficerByEmail(String email) throws RecordNotFoundException {
         for (Department department : departments) {
             for (PoliceOfficer officer : department.getOfficers()) {
                 if (officer.getEmail().equals(email)) return officer;
             }
         }
-        return null;
+        throw new RecordNotFoundException("Officer with email " + email + " not found");
     }
     public Admin getAdminByEmail(String email) {
         for (Admin admin : admins) {

@@ -1,5 +1,6 @@
 package com.sevenatseven.utils;
 
+import com.sevenatseven.exceptions.RecordNotFoundException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Model {
     protected String id;
@@ -60,7 +62,7 @@ public class Model {
      * @return the record as a String, or null if not found
      * @throws IOException if an I/O error occurs
      */
-    public String getRecordAt(String recordId) throws IOException {
+    public String getRecordAt(String recordId) throws IOException, RecordNotFoundException {
         String filePath = getFilePath();
         File file = new File(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -74,7 +76,8 @@ public class Model {
         } catch (FileNotFoundException e) {
             System.out.println("File not found" + e);
         }
-        return null;
+        throw new RecordNotFoundException(this.modelName + " with id " + recordId + " not found");
+
     }
     /**
      * Retrieves a record from the file by its email.
@@ -82,7 +85,7 @@ public class Model {
      * @return the record as a String, or null if not found
      * @throws IOException if an I/O error occurs
      */
-    public String getRecordByEmail(String email) throws IOException {
+    public String getRecordByEmail(String email) throws IOException, RecordNotFoundException {
         String filePath = getFilePath();
         File file = new File(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -94,9 +97,8 @@ public class Model {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return null;
         }
-        return null;
+        throw new RecordNotFoundException(this.modelName + " with email " + email + " not found");
     }
 
     /**

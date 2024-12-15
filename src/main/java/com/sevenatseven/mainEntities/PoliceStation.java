@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class PoliceStation {
     private String Name;
     private String Address;
-    private final ArrayList<Department> departments;
+    private ArrayList<Department> departments;
     private ArrayList<Admin> admins;
     public PoliceStation() {
         Name = "";
@@ -20,11 +20,13 @@ public class PoliceStation {
         Name = name;
         Address = address;
         this.departments = departments;
+        admins = new ArrayList<>();
     }
     public PoliceStation(String name, String address) {
         Name = name;
         Address = address;
         departments = new ArrayList<>();
+        admins = new ArrayList<>();
     }
     public PoliceStation(String Data) throws IOException {
         String[] data = Data.split(":");
@@ -39,7 +41,7 @@ public class PoliceStation {
         admins = new ArrayList<>();
         Model adminsModel = new Model("admins");
         for (String s : adminsModel.getAllRecords()) {
-            admins.add(new Admin(adminsModel.getRecordAt(s)));
+            admins.add(new Admin(s));
         }
     }
     public PoliceOfficer getOfficerByEmail(String email) {

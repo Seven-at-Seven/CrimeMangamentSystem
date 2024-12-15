@@ -72,8 +72,7 @@ public class Model {
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
+            System.out.println("File not found" + e);
         }
         return null;
     }

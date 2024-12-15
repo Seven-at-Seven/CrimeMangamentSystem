@@ -4,10 +4,11 @@ import com.sevenatseven.mainEntities.PoliceStation;
 import com.sevenatseven.utils.Model;
 import com.sevenatseven.utils.SceneManager;
 import com.sevenatseven.utils.Shared;
-import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Main extends Application {
     private void loadData() throws IOException {

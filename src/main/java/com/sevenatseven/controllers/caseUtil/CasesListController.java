@@ -1,4 +1,4 @@
-package com.sevenatseven.controllers;
+package com.sevenatseven.controllers.caseUtil;
 
 import com.sevenatseven.mainEntities.Case;
 import com.sevenatseven.mainEntities.PoliceOfficer;

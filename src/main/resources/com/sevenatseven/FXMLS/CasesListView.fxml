@@ -5,7 +5,7 @@
 <?import javafx.geometry.Insets?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
-    fx:controller="com.sevenatseven.controllers.case.CasesListController">
+    fx:controller="com.sevenatseven.controllers.caseUtil.CasesListController">
     <VBox spacing="10" alignment="TOP_CENTER" prefWidth="800" prefHeight="600">
         <padding>
             <Insets top="20" right="20" left="20" bottom="20" />

@@ -41,6 +41,6 @@ public class AdminLoginController extends BaseLoginController {
     alert.showAndWait();
 
     Shared.setCurrentAdmin(this.admin);
-    SceneManager.switchScene("entry");
+    SceneManager.switchScene("admin-choice");
   }
 }

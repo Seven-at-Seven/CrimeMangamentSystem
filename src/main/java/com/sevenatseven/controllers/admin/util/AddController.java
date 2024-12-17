@@ -1,5 +1,7 @@
 package com.sevenatseven.controllers.admin.util;
 
+import com.sevenatseven.exceptions.AlreadyExistException;
+import com.sevenatseven.mainEntities.Admin;
 import com.sevenatseven.mainEntities.Department;
 import com.sevenatseven.utils.Shared;
 import java.util.HashMap;
@@ -8,8 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 
 
 public class AddController {
@@ -36,7 +36,8 @@ public class AddController {
                 "Department",
                 "Police Officer",
                 "Criminal",
-                "Case"
+                "Case",
+                "Admin"
         );
     }
 
@@ -59,37 +60,48 @@ public class AddController {
         // Cancel button handler
         CancelButton.setOnAction(event -> {
             clearForm();
-            closeWindow();
         });
     }
 
     private void populateDetailsGrid(String entityType) {
-        inputFields.clear();
 
         switch (entityType) {
             case "Department":
-                addTextField("Department Name:", 0);
-                addDateField("Activation Date:", 1);
+                addTextField("Department ID:", 0);
+                addTextField("Department Name:", 1);
+                addDateField("Activation Date:", 2);
                 break;
             case "Police Officer":
-                addTextField("First Name:", 0);
-                addTextField("Last Name:", 1);
-                addTextField("Rank:", 2);
-                addTextField("Phone:", 3);
-                addTextField("Email:", 4);
-                addTextField("Salary:", 5);
+                addTextField("ID:", 0);
+                addTextField("First Name:", 1);
+                addTextField("Last Name:", 2);
+                addTextField("Email:", 3);
+                addTextField("Password:", 4);
+                addTextField("Phone Number:",5);
+                addTextField("Rank:", 6);
+                addTextField("Salary:", 7);
                 break;
             case "Criminal":
-                addTextField("First Name:", 0);
-                addTextField("Last Name:", 1);
-                addTextField("Current Cell:", 2);
-                addTextField("Number of Crimes:", 3);
-                addTextField("Psychological State:", 4);
+                addTextField("ID:", 0);
+                addTextField("First Name:", 1);
+                addTextField("Last Name:", 2);
+                addTextField("Current Cell:", 3);
+                addTextField("Number of Crimes:", 4);
+                addTextField("Psychological State:", 5);
+                addTextField("Cases Involved In (use \",\" to separate):", 6);
                 break;
             case "Case":
                 addTextField("Case Name:", 0);
                 addDateField("Start Date:", 1);
                 addDateField("Last Update Date:", 2);
+                break;
+            case "Admin":
+                addTextField("ID:", 0);
+                addTextField("First Name:", 1);
+                addTextField("Last Name:", 2);
+                addTextField("Email:", 3);
+                addTextField("Password:", 4);
+                addTextField("Confirm Password:", 5);
                 break;
         }
     }
@@ -131,7 +143,14 @@ public class AddController {
 
         inputFields.put(labelText, datePicker);
     }
-
+    public void addChoiceField(String labelText, int row, String[] choices){
+        Label label = new Label(labelText);
+        ChoiceBox<String> choiceBox = new ChoiceBox<>();
+        choiceBox.getItems().addAll(choices);
+        DetailsGrid.add(label, 0, row);
+        DetailsGrid.add(choiceBox, 1, row);
+        inputFields.put(labelText, choiceBox);
+    }
     private boolean validateAndAddEntry() {
         if (EntityAddBox.getValue() == null) {
             showAlert(Alert.AlertType.WARNING, "Entity Type Not Selected",
@@ -181,10 +200,18 @@ public class AddController {
                     // Commented out method to preserve the structure
                     //Shared.policeStation.AddCase(createCase());
                     break;
+                case "Admin":
+                    // Commented out method to preserve the structure
+                    Shared.getStation().AddAdmin(createAdmin());
+                    break;
             }
             showAlert(Alert.AlertType.INFORMATION, "Success", "Entry added successfully!");
             return true;
-        } catch (Exception e) {
+        }
+        catch (NullPointerException e){
+            return false;
+        }
+        catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to add entry: " + e.getMessage());
             return false;
         }
@@ -192,13 +219,20 @@ public class AddController {
 
     // Helper methods to create entities (these would need to match your model classes)
     private Department createDepartment() {
+        TextField idField = (TextField) inputFields.get("Department ID:");
         TextField nameField = (TextField) inputFields.get("Department Name:");
         DatePicker activationDatePicker = (DatePicker) inputFields.get("Activation Date:");
-
-        return new Department(
-                nameField.getText(),
-                activationDatePicker.getValue()
-        );
+        try {
+            return new Department(
+                    Integer.parseInt(idField.getText()),
+                    nameField.getText(),
+                    activationDatePicker.getValue()
+            );
+        }
+        catch (NumberFormatException e){
+            showAlert(Alert.AlertType.ERROR, "Error", "Department ID must be a number");
+            return null;
+        }
     }
 
     // Commented out methods to preserve the structure and provide reference
@@ -232,17 +266,34 @@ public class AddController {
         );
     }
     */
-
+    private Admin createAdmin() {
+        TextField idField = (TextField) inputFields.get("ID:");
+        TextField firstNameField = (TextField) inputFields.get("First Name:");
+        TextField lastNameField = (TextField) inputFields.get("Last Name:");
+        TextField emailField = (TextField) inputFields.get("Email:");
+        TextField passwordField = (TextField) inputFields.get("Password:");
+        TextField confirmPasswordField = (TextField) inputFields.get("Confirm Password:");
+        if(!validatingID(idField.getText(),"ad")){
+            return null;
+        }
+        if(!passwordField.getText().equals(confirmPasswordField.getText())){
+            showAlert(Alert.AlertType.ERROR, "Error", "Passwords do not match");
+            return null;
+        }
+        return new Admin(
+                idField.getText(),
+                firstNameField.getText(),
+                lastNameField.getText(),
+                emailField.getText(),
+                passwordField.getText()
+        );
+    }
     private void clearForm() {
-        EntityAddBox.setValue(null);
+        EntityAddBox.setValue("");
         DetailsGrid.getChildren().clear();
         inputFields.clear();
     }
 
-    private void closeWindow() {
-        Stage stage = (Stage) Layout.getScene().getWindow();
-        stage.close();
-    }
 
     private void showAlert(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
@@ -250,5 +301,22 @@ public class AddController {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+    public boolean validatingID(String pID,String pref){
+        if(pID.length() < 3){
+            showAlert(Alert.AlertType.ERROR, "Error", "ID must be at least 3 characters long");
+            return false;
+        }
+        String id = pID.substring(2);
+        if(!pID.contains("ad"))
+        {
+            showAlert(Alert.AlertType.ERROR, "Error", "ID must start with '" + pref + "'");
+            return false;
+        }
+        else if(!id.matches("\\d+")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "ID must contain only numbers after '" + pref + "'");
+            return false;
+        }
+        return true;
     }
 }

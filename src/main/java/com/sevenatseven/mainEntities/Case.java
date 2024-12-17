@@ -4,6 +4,8 @@ import com.sevenatseven.exceptions.RecordNotFoundException;
 import com.sevenatseven.utils.Model;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Case {
@@ -15,6 +17,7 @@ public class Case {
     private int departmentID;
     private ArrayList<Integer> officersID;
     private ArrayList<Criminal> criminals;
+    private Map<String,Boolean> criminalUsedIds;
 
     public Case(String caseData) {
         //id:description:crimeType:departmentID:officersID:criminals
@@ -44,6 +47,11 @@ public class Case {
             e.printStackTrace();
         } catch (RecordNotFoundException e) {
             System.out.println(e);
+        }
+        // for the adding of criminals
+        criminalUsedIds = new HashMap<>();
+        for (Criminal criminal : criminals) {
+            criminalUsedIds.put(criminal.getId(), true);
         }
     }
     public String getDescription() {
@@ -92,10 +100,13 @@ public class Case {
         this.departmentID = newDepartmentID;
         this.lastUpdateDate = LocalDate.now();
     }
-
-
-
-
-
+    // for the adding of criminals
+    public void addCriminal(Criminal criminal) {
+        criminals.add(criminal);
+        criminalUsedIds.put(criminal.getId(), true);
+    }
+    public Boolean isCriminalUsed(String criminalId) {
+        return criminalUsedIds.containsKey(criminalId);
+    }
 }
 

@@ -5,6 +5,8 @@ import com.sevenatseven.utils.Model;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Department {
     private final int id;
@@ -12,14 +14,18 @@ public class Department {
     private final LocalDate activationDate;
     private final ArrayList<PoliceOfficer> officers; // Array of officers
     private final ArrayList<Case> cases;       // Array of cases
+    private Map<Integer,Boolean> caseUsedIds;
+    private Map<String,Boolean> officerUsedIds;
 
     // Constructor: Initializes name, id, activationDate, and arrays
-    public Department(String name, int id, LocalDate activationDate) {
+    public Department(int id,String name, LocalDate activationDate) {
         this.name = name;
         this.id = id;
         this.activationDate = activationDate;
         this.officers = new ArrayList<>();
         this.cases = new ArrayList<>();
+        officerUsedIds = new HashMap<>();
+        caseUsedIds = new HashMap<>();
     }
     public Department(String name, LocalDate activationDate){
         this.name = name;
@@ -51,6 +57,14 @@ public class Department {
                 System.out.println(e);
             }
         }
+        officerUsedIds = new HashMap<>();
+        for(PoliceOfficer officer : officers){
+            officerUsedIds.put(officer.getId(),true);
+        }
+        caseUsedIds = new HashMap<>();
+        for(Case crimeCase : cases){
+            caseUsedIds.put(crimeCase.getCaseID(),true);
+        }
     }
     public void setCase(Case crimeCase) {
         for(Case c : cases){
@@ -64,6 +78,7 @@ public class Department {
     // 1. Function to add an officer
     public void addOfficer(PoliceOfficer officer) {
         officers.add(officer);
+        officerUsedIds.put(officer.getId(),true);
     }
 
     // 2. Function to return all officers
@@ -74,6 +89,7 @@ public class Department {
     // 3. Function to add a case
     public void addCase(Case crimeCase) {
         cases.add(crimeCase);
+        caseUsedIds.put(crimeCase.getCaseID(),true);
     }
 
     // 4. Function to return all cases
@@ -107,5 +123,11 @@ public class Department {
     }
     public void removeCase(Case crimeCase) {
         cases.remove(crimeCase);
+    }
+    public Boolean isOfficerIdUsed(String id) {
+        return officerUsedIds.containsKey(id);
+    }
+    public Boolean isCaseIdUsed(int id) {
+        return caseUsedIds.containsKey(id);
     }
 }

@@ -16,7 +16,7 @@ public class PoliceOfficer extends Person {
   }
 
   private PoliceOfficer(String[] parts) {
-    super(parts[0], parts[3], parts[4], parts[5]); // id, firstName, lastName, nationalId
+    super(parts[0], parts[3], parts[4]); // id, firstName, lastName
     this.email = parts[1]; // email
     this.password = parts[2]; // password
     this.salary = Integer.parseInt(parts[6]); // salary

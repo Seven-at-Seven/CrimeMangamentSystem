@@ -1,42 +1,52 @@
 package com.sevenatseven.mainEntities;
+import com.sevenatseven.exceptions.RecordNotFoundException;
+import com.sevenatseven.sideentities.Crime;
+import com.sevenatseven.sideentities.CrimeType;
 import com.sevenatseven.sideentities.DangerLevel;
+import com.sevenatseven.utils.Model;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
-
-
 
 public class Criminal extends Person {
     private String currentLocation;
     private DangerLevel dangerLevel;
-    private String behavioralPattern;
     private String psychologicalProfile;
-    private Map<String, Integer> crimeStatistics;
+    private Map<Crime, Integer> crimeStatistics;
+    private ArrayList<Crime> crimes;
 
-    public Criminal(String firstName, String lastName, String id, String nationalId, String currentLocation,
-                  String behavioralPattern, String psychologicalProfile,
-                    Map<String, Integer> crimeStatistics) {
-        super(firstName, lastName, id, nationalId);
+    public Criminal(String firstName, String lastName, String id, String currentLocation,
+                    String psychologicalProfile) {
+        super(firstName, lastName, id);
         this.currentLocation = currentLocation;
-        // this.dangerLevel = dangerLevel; compute danger level
-        this.behavioralPattern = behavioralPattern;
         this.psychologicalProfile = psychologicalProfile;
-        this.crimeStatistics = crimeStatistics;
+        crimeStatistics = new HashMap<>();
     }
-    // id:firstName:lastName:nationalId:currentLocation:dangerLevel:behavioralPattern:psychologicalProfile:crimeStatistics
-    public Criminal(String data) {
-        super(data.split(":")[0], data.split(":")[1], data.split(":")[2], data.split(":")[3]);
+
+    public Criminal(String data) throws IOException {
+        super(data.split(":")[0], data.split(":")[1], data.split(":")[2]);
         this.currentLocation = data.split(":")[4];
         this.dangerLevel = DangerLevel.valueOf(data.split(":")[5]);
-        this.behavioralPattern = data.split(":")[6];
-        this.psychologicalProfile = data.split(":")[7];
-        this.crimeStatistics = Map.of();
+        this.psychologicalProfile = data.split(":")[6];
+        String crimesData = data.split(":")[7];
+        this.crimes = new ArrayList<>();
+        Model model = new Model("crimes");
+        for (String crimeId : crimesData.split(",")) {
+            try {
+                this.crimes.add(new Crime(model.getRecordAt(crimeId)));
+            } catch (RecordNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        crimeStatistics = new HashMap<>();
+        this.computeCrimeStatistics();
+        this.criminalProfiling();
     }
 
     public DangerLevel getDangerLevel() {
         return dangerLevel;
-    }
-
-    public String getBehaviorPattern() {
-        return behavioralPattern;
     }
 
     public String getPsychologicalProfile() {
@@ -51,11 +61,48 @@ public class Criminal extends Person {
         return currentLocation;
     }
 
-    // Method to display crime statistics
-    public void displayCrimes() {
-        System.out.println("Crime Statistics:");
-        for (Map.Entry<String, Integer> entry : crimeStatistics.entrySet()) {
-            System.out.println("Crime: " + entry.getKey() + ", Count: " + entry.getValue());
+    public void computeCrimeStatistics() {
+        for (Crime crime : crimes) {
+            if (!crimeStatistics.containsKey(crime)) {
+                crimeStatistics.put(crime, 1);
+            } else {
+                crimeStatistics.put(crime, crimeStatistics.get(crime) + 1);
+            }
+        }
+    }
+
+    public void addCrime(Crime crime) {
+        if(crimes == null) {
+            crimes = new ArrayList<>();
+        }
+        crimes.add(crime);
+        if (!crimeStatistics.containsKey(crime)) {
+            crimeStatistics.put(crime, 1);
+        } else {
+            crimeStatistics.put(crime, crimeStatistics.get(crime) + 1);
+        }
+        this.criminalProfiling();
+    }
+
+    public void criminalProfiling() {
+        int severeCrimes = 0;
+        int totalCrimes = crimes.size();
+
+        for (Crime crime : crimes) {
+            CrimeType type = crime.getCrimeType();
+            if (type == CrimeType.MURDER || type == CrimeType.ASSAULT) {
+                severeCrimes++;
+            }
+        }
+
+        double severityRatio = (double) severeCrimes / totalCrimes;
+
+        if (severityRatio >= 0.5 || severeCrimes >= 5 || "High Risk".equalsIgnoreCase(psychologicalProfile)) {
+            this.dangerLevel = DangerLevel.HIGH;
+        } else if (severityRatio >= 0.2 || totalCrimes >= 3 || "Moderate Risk".equalsIgnoreCase(psychologicalProfile)) {
+            this.dangerLevel = DangerLevel.MEDIUM;
+        } else {
+            this.dangerLevel = DangerLevel.LOW;
         }
     }
 }

@@ -23,8 +23,12 @@ public class PoliceOfficer extends Person {
     this.phoneNumber = parts[7]; // phoneNumber
     this.rank = parts[8]; // rank
     this.departmentId = Integer.parseInt(parts[9]);
-    // exmaple: 1234:name@example.com:password:1234:1234:1234:1234:1234:1234:1234
+    // exmaple: off1234:name@example.com:password:1234:1234:1234:1234:1234:1234:1234
 
+  }
+
+  public PoliceOfficer(String id, String firstName, String lastName, String email, String password, String rank,String phoneNumber, int salary) {
+    super(id,firstName,lastName);
   }
 
   public Department getDepartment() {

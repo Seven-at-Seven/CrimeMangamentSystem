@@ -1,15 +1,21 @@
 package com.sevenatseven.controllers.admin.util;
 
 import com.sevenatseven.exceptions.AlreadyExistException;
+import com.sevenatseven.exceptions.DoesNotExistException;
 import com.sevenatseven.mainEntities.Admin;
+import com.sevenatseven.mainEntities.Case;
 import com.sevenatseven.mainEntities.Department;
+import com.sevenatseven.mainEntities.PoliceOfficer;
 import com.sevenatseven.utils.Shared;
+
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Pair;
 
 
 public class AddController {
@@ -75,11 +81,13 @@ public class AddController {
                 addTextField("ID:", 0);
                 addTextField("First Name:", 1);
                 addTextField("Last Name:", 2);
-                addTextField("Email:", 3);
-                addTextField("Password:", 4);
-                addTextField("Phone Number:",5);
-                addTextField("Rank:", 6);
-                addTextField("Salary:", 7);
+                addTextField("Phone Number:",3);
+                addTextField("Rank:", 4);
+                addTextField("Salary:", 5);
+                addTextField("Email:", 6);
+                addTextField("Password:", 7);
+                addTextField("Confirm Password:",8);
+                addTextField("Department ID:", 9);
                 break;
             case "Criminal":
                 addTextField("ID:", 0);
@@ -189,26 +197,24 @@ public class AddController {
                     Shared.getStation().AddDepartment(createDepartment());
                     break;
                 case "Police Officer":
-                    // Commented out method to preserve the structure
-                    //Shared.policeStation.AddPoliceOfficer(createPoliceOfficer());
+                    Pair<PoliceOfficer,Integer> policeAndDepID = createPoliceOfficer();
+                    Shared.getStation().getDepartment(policeAndDepID.getValue()).addOfficer(policeAndDepID.getKey());
                     break;
                 case "Criminal":
                     // Commented out method to preserve the structure
                     //Shared.policeStation.AddCriminal(createCriminal());
                     break;
                 case "Case":
-                    // Commented out method to preserve the structure
                     //Shared.policeStation.AddCase(createCase());
                     break;
                 case "Admin":
-                    // Commented out method to preserve the structure
                     Shared.getStation().AddAdmin(createAdmin());
                     break;
             }
             showAlert(Alert.AlertType.INFORMATION, "Success", "Entry added successfully!");
             return true;
         }
-        catch (NullPointerException e){
+        catch (NullPointerException e) {
             return false;
         }
         catch (Exception e) {
@@ -236,18 +242,47 @@ public class AddController {
     }
 
     // Commented out methods to preserve the structure and provide reference
-    /*
-    private PoliceOfficer createPoliceOfficer() {
-        return new PoliceOfficer(
-                inputFields.get("First Name:").getText(),
-                inputFields.get("Last Name:").getText(),
-                inputFields.get("Rank:").getText(),
-                inputFields.get("Phone:").getText(),
-                inputFields.get("Email:").getText(),
-                Double.parseDouble(inputFields.get("Salary:").getText())
-        );
+    private Pair<PoliceOfficer,Integer> createPoliceOfficer() {
+        TextField idField = (TextField) inputFields.get("ID:");
+        TextField firstNameField = (TextField) inputFields.get("First Name:");
+        TextField lastNameField = (TextField) inputFields.get("Last Name:");
+        TextField salaryField = (TextField) inputFields.get("Salary:");
+        TextField emailField = (TextField) inputFields.get("Email:");
+        TextField phoneField = (TextField) inputFields.get("Phone Number:");
+        TextField rankField = (TextField) inputFields.get("Rank:");
+        TextField passwordField = (TextField) inputFields.get("Password:");
+        TextField confirmPasswordField = (TextField) inputFields.get("Confirm Password:");
+        TextField depIDField = (TextField) inputFields.get("Department ID:");
+        if(!validatingID(idField.getText(),"off")){
+            return null;
+        }
+        if(salaryField.getText().charAt(0) == '0'){
+            showAlert(Alert.AlertType.ERROR, "Error", "salary must not begin with 0");
+        }
+        if(!passwordField.getText().equals(confirmPasswordField.getText())){
+            showAlert(Alert.AlertType.ERROR, "Error", "Passwords do not match");
+            return null;
+        }
+        try {
+            return new Pair<PoliceOfficer,Integer>(new PoliceOfficer(
+                    idField.getText(),
+                    firstNameField.getText(),
+                    lastNameField.getText(),
+                    emailField.getText(),
+                    passwordField.getText(),
+                    rankField.getText(),
+                    phoneField.getText(),
+                    Integer.parseInt(salaryField.getText())
+            ),Integer.parseInt(depIDField.getText()));
+        }
+        catch (NumberFormatException e)
+        {
+            showAlert(Alert.AlertType.ERROR, "Error", "Department ID and salary must be numbers");
+            return null;
+        }
     }
 
+    /*
     private Criminal createCriminal() {
         return new Criminal(
                 inputFields.get("First Name:").getText(),
@@ -303,12 +338,12 @@ public class AddController {
         alert.showAndWait();
     }
     public boolean validatingID(String pID,String pref){
-        if(pID.length() < 3){
-            showAlert(Alert.AlertType.ERROR, "Error", "ID must be at least 3 characters long");
+        if(pID.length() < pref.length()+1){
+            showAlert(Alert.AlertType.ERROR, "Error", "ID must be at least " + (pref.length()+1) + " characters long");
             return false;
         }
-        String id = pID.substring(2);
-        if(!pID.contains("ad"))
+        String id = pID.substring(pref.length());
+        if(!pID.contains(pref))
         {
             showAlert(Alert.AlertType.ERROR, "Error", "ID must start with '" + pref + "'");
             return false;

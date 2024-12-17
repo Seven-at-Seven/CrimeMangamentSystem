@@ -1,5 +1,6 @@
 package com.sevenatseven.mainEntities;
 
+import com.sevenatseven.exceptions.AlreadyExistException;
 import com.sevenatseven.exceptions.RecordNotFoundException;
 import com.sevenatseven.utils.Model;
 import java.io.IOException;
@@ -76,7 +77,9 @@ public class Department {
         }
     }
     // 1. Function to add an officer
-    public void addOfficer(PoliceOfficer officer) {
+    public void addOfficer(PoliceOfficer officer) throws AlreadyExistException , NullPointerException {
+        if(officer == null | officerUsedIds == null) throw new NullPointerException("officers are null");
+        if(officerUsedIds.containsKey(officer.getId()))throw new AlreadyExistException("officer with ID: " + officer.getId() + "already exist");
         officers.add(officer);
         officerUsedIds.put(officer.getId(),true);
     }
@@ -87,7 +90,9 @@ public class Department {
     }
 
     // 3. Function to add a case
-    public void addCase(Case crimeCase) {
+    public void addCase(Case crimeCase) throws AlreadyExistException, NullPointerException {
+        if(crimeCase == null | caseUsedIds == null) throw new NullPointerException("cases are null");
+        if(caseUsedIds.containsKey(crimeCase.getCaseID()))throw new AlreadyExistException("case with ID: " + crimeCase.getCaseID() + "already exist");
         cases.add(crimeCase);
         caseUsedIds.put(crimeCase.getCaseID(),true);
     }

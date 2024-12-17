@@ -1,6 +1,7 @@
 package com.sevenatseven.mainEntities;
 
 import com.sevenatseven.exceptions.AlreadyExistException;
+import com.sevenatseven.exceptions.DoesNotExistException;
 import com.sevenatseven.exceptions.RecordNotFoundException;
 import com.sevenatseven.utils.Model;
 import java.io.IOException;
@@ -99,11 +100,11 @@ public class PoliceStation {
     public void RemoveDepartment(Department department) {
         departments.remove(department);
     }
-    public Department getDepartment(int ID) {
+    public Department getDepartment(int ID) throws DoesNotExistException {
         for (Department department : departments) {
             if(department.getId() == ID) return department;
         }
-        return null;
+        throw new DoesNotExistException("Department with ID: " + ID + " does not exist");
     }
     // functions for admin
 

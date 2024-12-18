@@ -29,11 +29,11 @@ public class Criminal extends Person {
     }
 
     public Criminal(String data) throws IOException {
-        super(data.split(":")[0], data.split(":")[1], data.split(":")[2]);
-        this.currentLocation = data.split(":")[4];
-        this.dangerLevel = DangerLevel.valueOf(data.split(":")[5]);
-        this.psychologicalProfile = data.split(":")[6];
-        String crimesData = data.split(":")[7];
+        super(data.split(":")[2], data.split(":")[0], data.split(":")[1]);
+        this.currentLocation = data.split(":")[3];
+        this.dangerLevel = DangerLevel.valueOf(data.split(":")[4]);
+        this.psychologicalProfile = data.split(":")[5];
+        String crimesData = data.split(":")[6];
         this.crimes = new ArrayList<>();
         Model model = new Model("crimes");
         for (String crimeId : crimesData.split(",")) {

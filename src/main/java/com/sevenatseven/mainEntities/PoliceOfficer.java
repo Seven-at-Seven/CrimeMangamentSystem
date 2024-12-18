@@ -27,8 +27,14 @@ public class PoliceOfficer extends Person {
 
   }
 
-  public PoliceOfficer(String id, String firstName, String lastName, String email, String password, String rank,String phoneNumber, int salary) {
+  public PoliceOfficer(String id, String firstName, String lastName, String email, String password, String rank,String phoneNumber, int salary,int departmentId) {
     super(id,firstName,lastName);
+    this.email = email;
+    this.password = password;
+    this.rank = rank;
+    this.phoneNumber = phoneNumber;
+    this.salary = salary;
+    this.departmentId = departmentId;
   }
 
   public Department getDepartment() {

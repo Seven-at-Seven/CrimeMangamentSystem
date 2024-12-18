@@ -39,7 +39,7 @@ public class Main extends Application {
         try {
             Image icon = new Image(getClass().getResource("/assets/Images/Police_icon.png").toExternalForm());
             stage.getIcons().add(icon);
-            SceneManager.switchScene("add-entity");
+            SceneManager.switchScene("entry");
             stage.show();
         }
         catch (IOException e) {
@@ -52,19 +52,25 @@ public void stop() {
 }
     public static void main(String[] args) {
         launch(args);
-        System.out.println("Admins: ");
-        ArrayList<Admin> admins = Shared.getStation().getAdmins();
-        for(Admin admin : admins) {
-            System.out.println(admin.getName());
-        }
-        System.out.println("Deps: ");
-        ArrayList<Department> departments = Shared.getStation().getDepartments();
-        for(Department department : departments){
-            System.out.println("Officers of dep" + department.getId());
-            ArrayList<PoliceOfficer> officers = department.getOfficers();
-            for (PoliceOfficer officer : officers){
-                System.out.println(officer.getName());
-            }
-        }
+        // debug
+//        System.out.println("Admins: ");
+//        ArrayList<Admin> admins = Shared.getStation().getAdmins();
+//        for(Admin admin : admins) {
+//            System.out.println(admin.getName());
+//        }
+//        System.out.println("Deps: ");
+//        ArrayList<Department> departments = Shared.getStation().getDepartments();
+//        for(Department department : departments){
+//            System.out.println("Officers of dep" + department.getId());
+//            ArrayList<PoliceOfficer> officers = department.getOfficers();
+//            for (PoliceOfficer officer : officers){
+//                System.out.println(officer.getName());
+//            }
+//            System.out.println("Cases of dep" + department.getId());
+//            ArrayList<com.sevenatseven.mainEntities.Case> cases = department.getCases();
+//            for (com.sevenatseven.mainEntities.Case crimeCase : cases){
+//                System.out.println(crimeCase.getDescription());
+//            }
+//        }
     }
 }

@@ -16,6 +16,8 @@ public class PoliceStation {
     private Map<Integer, Boolean> departmentUsedIds;
     private Map<String, Boolean> adminsUsedIds;
     private ArrayList<Admin> admins;
+    private Map<String,Boolean> officersUsedID;
+    private Map<Integer,Boolean> caseUsedIds;
     // private Person CurrentUser;
     public PoliceStation() {
         Name = "";
@@ -24,18 +26,9 @@ public class PoliceStation {
         admins = new ArrayList<>();
         departmentUsedIds = new HashMap<>();
         adminsUsedIds = new HashMap<>();
+        officersUsedID = new HashMap<>();
     }
-    public PoliceStation(String name, String address, ArrayList<Department> departments) {
-        Name = name;
-        Address = address;
-        this.departments = departments;
-        admins = new ArrayList<>();
-        departmentUsedIds = new HashMap<>();
-        for(Department department : departments) {
-            departmentUsedIds.put(department.getId(), true);
-        }
-        adminsUsedIds = new HashMap<>();
-    }
+
     public PoliceStation(String Data) throws IOException {
         String[] data = Data.split(":");
         Name = data[0];
@@ -43,9 +36,14 @@ public class PoliceStation {
         String[] departmentsIds = data[2].split(",");
         departments = new ArrayList<>();
         Model model = new Model("departments");
+        departmentUsedIds = new HashMap<>();
+        officersUsedID = new HashMap<>();
+        caseUsedIds = new HashMap<>();
+        adminsUsedIds = new HashMap<>();
         for (String s : departmentsIds) {
             try {
                 departments.add(new Department(model.getRecordAt(s)));
+                departmentUsedIds.put(Integer.parseInt(s), true);
             } catch (RecordNotFoundException e) {
                 System.out.println(e);
             }
@@ -55,13 +53,16 @@ public class PoliceStation {
         for (String s : adminsModel.getAllRecords()) {
                 admins.add(new Admin(s));
         }
-        departmentUsedIds = new HashMap<>();
-        for(Department department : departments) {
-            departmentUsedIds.put(department.getId(), true);
-        }
-        adminsUsedIds = new HashMap<>();
         for(Admin admin : admins) {
             adminsUsedIds.put(admin.getId(), true);
+        }
+        for(Department department : departments) {
+            for(PoliceOfficer officer : department.getOfficers()) {
+                officersUsedID.put(officer.getId(), true);
+            }
+            for(Case crimeCase : department.getCases()) {
+                caseUsedIds.put(crimeCase.getCaseID(), true);
+            }
         }
     }
     public PoliceOfficer getOfficerByEmail(String email) throws RecordNotFoundException {
@@ -93,7 +94,7 @@ public class PoliceStation {
     }
     public void AddDepartment(Department department) throws AlreadyExistException {
         if(department == null) throw new NullPointerException("Department cannot be null");
-        if(departmentUsedIds.containsKey(department.getId()))
+        if(isDepartmentIdUsed(department.getId()))
             throw new AlreadyExistException("Department with ID " + department.getId() + " already exists");
         departments.add(department);
     }
@@ -116,7 +117,7 @@ public class PoliceStation {
     }
     public void AddAdmin(Admin admin) throws AlreadyExistException {
         if(admin == null) throw new NullPointerException("Admin cannot be null");
-        if(adminsUsedIds.containsKey(admin.getId()))
+        if(isAdminIdUsed(admin.getId()))
             throw new AlreadyExistException("Admin with ID " + admin.getId() + " already exists");
         admins.add(admin);
     }
@@ -133,5 +134,18 @@ public class PoliceStation {
 
     public ArrayList<Admin> getAdmins() {
         return admins;
+    }
+    // for officer
+    public boolean isOfficerIdUsed(String id) {
+        return officersUsedID.containsKey(id);
+    }
+    public void addOfficerId(String id) {
+        officersUsedID.put(id, true);
+    }
+    public boolean isCaseIdUsed(int id) {
+        return caseUsedIds.containsKey(id);
+    }
+    public void addCaseId(int id) {
+        caseUsedIds.put(id, true);
     }
 }

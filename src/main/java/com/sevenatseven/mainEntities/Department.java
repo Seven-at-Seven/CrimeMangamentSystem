@@ -3,6 +3,8 @@ package com.sevenatseven.mainEntities;
 import com.sevenatseven.exceptions.AlreadyExistException;
 import com.sevenatseven.exceptions.RecordNotFoundException;
 import com.sevenatseven.utils.Model;
+import com.sevenatseven.utils.Shared;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,23 +17,12 @@ public class Department {
     private final LocalDate activationDate;
     private final ArrayList<PoliceOfficer> officers; // Array of officers
     private final ArrayList<Case> cases;       // Array of cases
-    private Map<Integer,Boolean> caseUsedIds;
-    private Map<String,Boolean> officerUsedIds;
 
     // Constructor: Initializes name, id, activationDate, and arrays
     public Department(int id,String name, LocalDate activationDate) {
         this.name = name;
         this.id = id;
         this.activationDate = activationDate;
-        this.officers = new ArrayList<>();
-        this.cases = new ArrayList<>();
-        officerUsedIds = new HashMap<>();
-        caseUsedIds = new HashMap<>();
-    }
-    public Department(String name, LocalDate activationDate){
-        this.name = name;
-        this.activationDate = activationDate;
-        this.id = 0;
         this.officers = new ArrayList<>();
         this.cases = new ArrayList<>();
     }
@@ -41,6 +32,7 @@ public class Department {
         name = data1[1];
         activationDate = LocalDate.parse(data1[2]);
         officers = new ArrayList<>();
+        cases = new ArrayList<>();
         Model officersModel = new Model("officers");
         for(String s : data1[3].split(",")){
             try {
@@ -49,7 +41,6 @@ public class Department {
                 System.out.println(e);
             }
         }
-        cases = new ArrayList<>();
         Model casesModel = new Model("cases");
         for(String s : data1[4].split(",")){
             try {
@@ -57,14 +48,6 @@ public class Department {
             } catch (RecordNotFoundException e) {
                 System.out.println(e);
             }
-        }
-        officerUsedIds = new HashMap<>();
-        for(PoliceOfficer officer : officers){
-            officerUsedIds.put(officer.getId(),true);
-        }
-        caseUsedIds = new HashMap<>();
-        for(Case crimeCase : cases){
-            caseUsedIds.put(crimeCase.getCaseID(),true);
         }
     }
     public void setCase(Case crimeCase) {
@@ -78,10 +61,13 @@ public class Department {
     }
     // 1. Function to add an officer
     public void addOfficer(PoliceOfficer officer) throws AlreadyExistException , NullPointerException {
-        if(officer == null | officerUsedIds == null) throw new NullPointerException("officers are null");
-        if(officerUsedIds.containsKey(officer.getId()))throw new AlreadyExistException("officer with ID: " + officer.getId() + "already exist");
+        if(officer == null) throw new NullPointerException("officers are null");
+        for(Department department : Shared.getStation().getDepartments()) {
+            if (Shared.getStation().isOfficerIdUsed(officer.getId()))
+                throw new AlreadyExistException("officer with ID: " + officer.getId() + " already exist");
+        }
         officers.add(officer);
-        officerUsedIds.put(officer.getId(),true);
+        Shared.getStation().addOfficerId(officer.getId());
     }
 
     // 2. Function to return all officers
@@ -91,10 +77,10 @@ public class Department {
 
     // 3. Function to add a case
     public void addCase(Case crimeCase) throws AlreadyExistException, NullPointerException {
-        if(crimeCase == null | caseUsedIds == null) throw new NullPointerException("cases are null");
-        if(caseUsedIds.containsKey(crimeCase.getCaseID()))throw new AlreadyExistException("case with ID: " + crimeCase.getCaseID() + "already exist");
+        if(crimeCase == null) throw new NullPointerException("cases are null");
+        if(Shared.getStation().isCaseIdUsed(crimeCase.getCaseID()))throw new AlreadyExistException("case with ID: " + crimeCase.getCaseID() + " already exist");
         cases.add(crimeCase);
-        caseUsedIds.put(crimeCase.getCaseID(),true);
+        Shared.getStation().addCaseId(crimeCase.getCaseID());
     }
 
     // 4. Function to return all cases
@@ -102,7 +88,7 @@ public class Department {
         return cases;
     }
 
-    public PoliceOfficer getOfficerByEmail(String email) {
+    public PoliceOfficer getOfficer(String email) {
         for (PoliceOfficer officer : officers) {
             if (officer.getEmail().equals(email)) { // Assuming Officer has getId()
                 return officer;
@@ -110,7 +96,14 @@ public class Department {
         }
         return null; // Return null if officer is not found
     }
-
+    public boolean officerExist(String Id) {
+        for (PoliceOfficer officer : officers) {
+            if (officer.getId().equals(Id)) {
+                return true;
+            }
+        }
+        return false;
+    }
     // Getters for department attributes
     public String getName() {
         return name;
@@ -128,11 +121,5 @@ public class Department {
     }
     public void removeCase(Case crimeCase) {
         cases.remove(crimeCase);
-    }
-    public Boolean isOfficerIdUsed(String id) {
-        return officerUsedIds.containsKey(id);
-    }
-    public Boolean isCaseIdUsed(int id) {
-        return caseUsedIds.containsKey(id);
     }
 }

@@ -6,9 +6,11 @@ import com.sevenatseven.mainEntities.Admin;
 import com.sevenatseven.mainEntities.Case;
 import com.sevenatseven.mainEntities.Department;
 import com.sevenatseven.mainEntities.PoliceOfficer;
+import com.sevenatseven.sideentities.CrimeType;
 import com.sevenatseven.utils.Shared;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.fxml.FXML;
@@ -90,18 +92,25 @@ public class AddController {
                 addTextField("Department ID:", 9);
                 break;
             case "Criminal":
-                addTextField("ID:", 0);
                 addTextField("First Name:", 1);
                 addTextField("Last Name:", 2);
                 addTextField("Current Cell:", 3);
                 addTextField("Number of Crimes:", 4);
                 addTextField("Psychological State:", 5);
-                addTextField("Cases Involved In (use \",\" to separate):", 6);
+                addTextField("Cases Involved In IDs (use \",\" to separate):", 6);
                 break;
             case "Case":
-                addTextField("Case Name:", 0);
+                addTextField("Case ID:", 0);
                 addDateField("Start Date:", 1);
-                addDateField("Last Update Date:", 2);
+                addTextField("Department ID:", 2);
+                addTextField("Officers handled IDs (use \",\" to separate):", 3);
+                addChoiceField("Crime type:", 4, new String[] {"THEFT",
+                        "ASSAULT",
+                        "FRAUD",
+                        "MURDER",
+                        "VANDALISM",
+                        "ROBBERY"});
+                addTextField("Description:",5);
                 break;
             case "Admin":
                 addTextField("ID:", 0);
@@ -205,7 +214,7 @@ public class AddController {
                     //Shared.policeStation.AddCriminal(createCriminal());
                     break;
                 case "Case":
-                    //Shared.policeStation.AddCase(createCase());
+                    createCase();
                     break;
                 case "Admin":
                     Shared.getStation().AddAdmin(createAdmin());
@@ -272,7 +281,8 @@ public class AddController {
                     passwordField.getText(),
                     rankField.getText(),
                     phoneField.getText(),
-                    Integer.parseInt(salaryField.getText())
+                    Integer.parseInt(salaryField.getText()),
+                    Integer.parseInt(depIDField.getText())
             ),Integer.parseInt(depIDField.getText()));
         }
         catch (NumberFormatException e)
@@ -293,14 +303,51 @@ public class AddController {
         );
     }
 
-    private Case createCase() {
-        return new Case(
-                inputFields.get("Case Name:").getText(),
-                LocalDate.parse(inputFields.get("Start Date:").getText()),
-                LocalDate.parse(inputFields.get("Last Update Date:").getText())
-        );
-    }
     */
+    private void createCase() throws NullPointerException {
+        TextField caseIDField = (TextField) inputFields.get("Case ID:");
+        DatePicker startDatePicker = (DatePicker) inputFields.get("Start Date:");
+        TextField depIDField = (TextField) inputFields.get("Department ID:");
+        TextField officersField = (TextField) inputFields.get("Officers handled IDs (use \",\" to separate):");
+        TextField descriptionField = (TextField) inputFields.get("Description:");
+        CrimeType crimeType = CrimeType.valueOf(
+                ((ChoiceBox<String>) inputFields.get("Crime type:"))
+                        .getValue().toUpperCase());
+        boolean added = true;
+        try {
+            Department department = Shared.getStation().getDepartment(Integer.parseInt(depIDField.getText()));
+            int caseID = Integer.parseInt(caseIDField.getText());
+            for(String officer : officersField.getText().split(",")){
+                if(!officer.matches("off\\d+")){
+                    showAlert(Alert.AlertType.ERROR, "Error", "Officer ID must be like 'off33'");
+                    added = false;
+                }
+                if(!department.officerExist(officer)){
+                    showAlert(Alert.AlertType.ERROR, "Error", "Officer with ID " + officer + " does not exist in this department");
+                    added = false;
+                }
+            }
+            if(added) {
+                department.addCase(new Case(
+                        caseID,
+                        startDatePicker.getValue(),
+                        crimeType,
+                        descriptionField.getText(),
+                        department.getId(),
+                        officersField.getText().split(",")
+                ));
+            }
+        }
+        catch (DoesNotExistException e){
+            showAlert(Alert.AlertType.ERROR, "Error", "Department with ID " + depIDField.getText() + " does not exist");
+            added = false;
+        }
+        catch (NumberFormatException e){
+            showAlert(Alert.AlertType.ERROR, "Error", "Department and Case ID must be a number");
+            added = false;
+        }
+        if(!added) throw new NullPointerException();
+    }
     private Admin createAdmin() {
         TextField idField = (TextField) inputFields.get("ID:");
         TextField firstNameField = (TextField) inputFields.get("First Name:");

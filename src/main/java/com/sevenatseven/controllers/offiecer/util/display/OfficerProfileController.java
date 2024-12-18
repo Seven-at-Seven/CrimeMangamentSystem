@@ -2,25 +2,29 @@ package com.sevenatseven.controllers.offiecer.util.display;
 
 import com.sevenatseven.utils.SceneManager;
 import com.sevenatseven.utils.Shared;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 public class OfficerProfileController {
-    @FXML
-    public Label firstName;
-    @FXML
-    public Label lastName;
-    @FXML
-    public Label email;
-    @FXML
-    public Label phoneNumber;
-    @FXML
-    public Label rank;
-    @FXML
-    public Label salary;
-    @FXML
-    public Label departmentId;
+   @FXML
+    public TextField firstName;
+   @FXML
+    public TextField lastName;
+   @FXML
+   public TextField email;
+   @FXML
+   public TextField phoneNumber;
+   @FXML
+   public TextField rank;
+   @FXML
+   public TextField salary;
+   @FXML
+   public TextField departmentId;
+
     @FXML
 public void initialize() {
 email.setText(Shared.getCurrentOfficer().getEmail());

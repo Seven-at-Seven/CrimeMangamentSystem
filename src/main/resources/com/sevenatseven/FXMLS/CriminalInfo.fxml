@@ -9,6 +9,62 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.sevenatseven.controllers.offiecer.util.display.info.CriminalInfoController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="600.0" prefWidth="800.0" styleClass="background">
+    
+    <stylesheets>
+        <URL value="@../../styles/styles.css" />
+    </stylesheets>
 
+    <VBox spacing="20" alignment="TOP_CENTER" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" 
+          AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+        
+        <!-- Header -->
+        <HBox alignment="CENTER" styleClass="header-section">
+            <Label fx:id="nameLabel" styleClass="header-text" />
+            <Label fx:id="idLabel" styleClass="id-text" />
+        </HBox>
+
+        <!-- Main Content -->
+        <GridPane hgap="20" vgap="15" styleClass="info-grid">
+            <columnConstraints>
+                <ColumnConstraints minWidth="150" />
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+
+            <!-- Personal Information Section -->
+            <Label text="Current Location:" styleClass="label-header" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+            <Label fx:id="locationLabel" styleClass="label-content" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+            <Label text="Danger Level:" styleClass="label-header" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+            <Label fx:id="dangerLevelLabel" styleClass="label-content" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+            <Label text="Psychological Profile:" styleClass="label-header" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+            <TextArea fx:id="psychProfileArea" styleClass="text-area" wrapText="true" editable="false" 
+                     GridPane.rowIndex="2" GridPane.columnIndex="1" />
+        </GridPane>
+
+        <!-- Crimes Section -->
+        <VBox spacing="10" styleClass="crimes-section">
+            <Label text="Criminal History" styleClass="section-header" />
+            <TableView fx:id="crimesTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="crimeTypeColumn" text="Crime Type" />
+                    <TableColumn fx:id="crimeDateColumn" text="Date" />
+                    <TableColumn fx:id="crimeLocationColumn" text="Location" />
+                    <TableColumn fx:id="crimeDescriptionColumn" text="Description" />
+                </columns>
+            </TableView>
+        </VBox>
+
+        <!-- Statistics Section -->
+        <VBox spacing="10" styleClass="stats-section">
+            <Label text="Crime Statistics" styleClass="section-header" />
+            <TableView fx:id="statsTable" prefHeight="150">
+                <columns>
+                    <TableColumn fx:id="crimeTypeStatsColumn" text="Crime Type" />
+                    <TableColumn fx:id="crimeCountColumn" text="Count" />
+                </columns>
+            </TableView>
+        </VBox>
+    </VBox>
 </AnchorPane>

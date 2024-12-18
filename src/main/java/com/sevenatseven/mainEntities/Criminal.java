@@ -87,6 +87,14 @@ public class Criminal extends Person {
         this.criminalProfiling();
     }
 
+    public ArrayList<Crime> getCrimes() {
+        return new ArrayList<>(crimes);
+    }
+
+    public Map<Crime, Integer> getCrimeStatistics() {
+        return new HashMap<>(crimeStatistics);
+    }
+
     public void criminalProfiling() {
         int severeCrimes = 0;
         int totalCrimes = crimes.size();

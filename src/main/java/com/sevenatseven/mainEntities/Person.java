@@ -7,9 +7,9 @@ abstract public class Person { // will use the setters for updating
     private String nationalID;
 
     public Person(String id,String firstName, String lastName,  String nationalID) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.id = id;
         this.nationalID = nationalID;
     }
 

@@ -74,6 +74,7 @@ public class PoliceOfficer extends Person {
   public void setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
   }
+
   public ArrayList<Case> getCases() {
     try{
     ArrayList<Case> cases = new ArrayList<>();

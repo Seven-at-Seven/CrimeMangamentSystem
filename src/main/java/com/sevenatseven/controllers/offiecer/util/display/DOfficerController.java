@@ -9,14 +9,6 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 
 public class DOfficerController {
-//    @FXML
-//    public Label welcomeLabel;
-//
-//    @FXML
-//    public void initialize() {
-//        welcomeLabel.setText("Welcome Officer " + "Omar Hasan");
-//    }
-
 
     public void goToCases(ActionEvent event) {
         try {

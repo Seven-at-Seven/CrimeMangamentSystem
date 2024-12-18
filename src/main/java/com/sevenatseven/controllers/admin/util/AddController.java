@@ -2,10 +2,8 @@ package com.sevenatseven.controllers.admin.util;
 
 import com.sevenatseven.exceptions.AlreadyExistException;
 import com.sevenatseven.exceptions.DoesNotExistException;
-import com.sevenatseven.mainEntities.Admin;
-import com.sevenatseven.mainEntities.Case;
-import com.sevenatseven.mainEntities.Department;
-import com.sevenatseven.mainEntities.PoliceOfficer;
+import com.sevenatseven.mainEntities.*;
+import com.sevenatseven.sideentities.Crime;
 import com.sevenatseven.sideentities.CrimeType;
 import com.sevenatseven.utils.Shared;
 
@@ -92,12 +90,11 @@ public class AddController {
                 addTextField("Department ID:", 9);
                 break;
             case "Criminal":
-                addTextField("First Name:", 1);
-                addTextField("Last Name:", 2);
-                addTextField("Current Cell:", 3);
-                addTextField("Number of Crimes:", 4);
-                addTextField("Psychological State:", 5);
-                addTextField("Cases Involved In IDs (use \",\" to separate):", 6);
+                addTextField("First Name:", 0);
+                addTextField("Last Name:", 1);
+                addTextField("Current location:", 2);
+                addTextField("Psychological State:", 3);
+                addTextField("Cases Involved In IDs (use \",\" to separate):", 4);
                 break;
             case "Case":
                 addTextField("Case ID:", 0);
@@ -210,8 +207,7 @@ public class AddController {
                     Shared.getStation().getDepartment(policeAndDepID.getValue()).addOfficer(policeAndDepID.getKey());
                     break;
                 case "Criminal":
-                    // Commented out method to preserve the structure
-                    //Shared.policeStation.AddCriminal(createCriminal());
+                    createCriminal();
                     break;
                 case "Case":
                     createCase();
@@ -292,18 +288,54 @@ public class AddController {
         }
     }
 
-    /*
-    private Criminal createCriminal() {
-        return new Criminal(
-                inputFields.get("First Name:").getText(),
-                inputFields.get("Last Name:").getText(),
-                inputFields.get("Current Cell:").getText(),
-                Integer.parseInt(inputFields.get("Number of Crimes:").getText()),
-                inputFields.get("Psychological State:").getText()
-        );
+    private void createCriminal() throws NullPointerException {
+        TextField firstNameField = (TextField) inputFields.get("First Name:");
+        TextField lastNameField = (TextField) inputFields.get("Last Name:");
+        TextField locationField = (TextField) inputFields.get("Current location:");
+        TextField profileField = (TextField) inputFields.get("Psychological State:");
+        String casesFiled = ((TextField) inputFields.get("Cases Involved In IDs (use \",\" to separate):")).getText();
+        boolean added = true;
+        try {
+            Map<Integer, Boolean> casesIds = new HashMap<>();
+            for(int i = 0; i < casesFiled.split(",").length; i++){
+                casesIds.put(Integer.parseInt(casesFiled.split(",")[i]),false);
+            }
+            Criminal criminal = new Criminal(
+                    firstNameField.getText(),
+                    lastNameField.getText(),
+                    locationField.getText(),
+                    profileField.getText()
+            );
+            for(Department department : Shared.getStation().getDepartments()){
+                for (Case c : department.getCases()){
+                        if(casesIds.containsKey(c.getCaseID())) {
+                            if(!casesIds.get(c.getCaseID()))
+                            {
+                                c.addCriminal(criminal);
+                                criminal.addCrime(new Crime(c.getCrimeType(), c.getStartDate()));
+                                casesIds.put(c.getCaseID(), true);
+                            }
+                        }
+                }
+            }
+            for (Map.Entry<Integer, Boolean> entry : casesIds.entrySet()) {
+                if (!entry.getValue()) {
+                    showAlert(Alert.AlertType.ERROR, "Error", "Criminal was not added in Case: " + entry.getKey()
+                            + " because it was not found");
+                    added = false;
+                }
+            }
+        }
+        catch (NumberFormatException e){
+            showAlert(Alert.AlertType.ERROR,"Error","Case IDs' must be numbers");
+            added = false;
+        }
+        catch (Exception e){
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to create criminal: " + e.getMessage());
+            added = false;
+        }
+        if(!added) throw new NullPointerException();
     }
-
-    */
     private void createCase() throws NullPointerException {
         TextField caseIDField = (TextField) inputFields.get("Case ID:");
         DatePicker startDatePicker = (DatePicker) inputFields.get("Start Date:");

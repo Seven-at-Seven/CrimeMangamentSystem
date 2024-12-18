@@ -26,7 +26,7 @@ public class CaseUpdateController {
 
         caseIdLabel.setText(String.valueOf(caseToUpdate.getCaseID()));
         descriptionField.setText(caseToUpdate.getDescription());
-        crimeTypeField.setText(caseToUpdate.getCrimeType());
+        crimeTypeField.setText(caseToUpdate.getCrimeTypeString());
         departmentIdField.setText(String.valueOf(caseToUpdate.getDepartmentID()));
     }
 

@@ -3,6 +3,8 @@ package com.sevenatseven.mainEntities;
 import com.sevenatseven.exceptions.RecordNotFoundException;
 import com.sevenatseven.sideentities.CrimeType;
 import com.sevenatseven.utils.Model;
+import com.sevenatseven.utils.Shared;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,12 +17,10 @@ public class Case {
     private String description;
     private final LocalDate startDate;
     private LocalDate lastUpdateDate;
-    private String crimeType;
+    private CrimeType crimeType;
     private int departmentID;
     private ArrayList<String> officersID;
     private ArrayList<Criminal> criminals;
-    private static int nextCriminalID = 1;
-
     public Case(String caseData) {
         //id:description:crimeType:departmentID:officersID:criminals
         String[] words = caseData.split(":");
@@ -28,7 +28,7 @@ public class Case {
         this.description = words[1];
         this.startDate = LocalDate.now();
         this.lastUpdateDate = this.startDate;
-        this.crimeType = words[2];
+        this.crimeType = CrimeType.valueOf(words[2].toUpperCase());
         this.departmentID = Integer.parseInt(words[3]);
 
         // officersID
@@ -42,9 +42,6 @@ public class Case {
         try {
             for (String criminalId : criminalsID) {
                 this.criminals.add(new Criminal(model.getRecordAt(criminalId)));
-                if (Integer.parseInt(criminalId) >= nextCriminalID) {
-                    nextCriminalID = Integer.parseInt(criminalId) + 1;
-                }
             }
         } catch (java.io.IOException e) {
             e.printStackTrace();
@@ -59,19 +56,11 @@ public class Case {
         this.description = description;
         this.startDate = startDatePickerValue;
         this.lastUpdateDate = this.startDate;
-        this.crimeType = crimeType.toString();
+        this.crimeType = crimeType;
         this.departmentID = departmentID;
         this.officersID = new ArrayList<>();
         this.officersID.addAll(Arrays.asList(officersID));
         this.criminals = new ArrayList<>();
-    }
-
-    public static int getNextCriminalID() {
-        return nextCriminalID;
-    }
-
-    public static void setNextCriminalID(int nextCriminalID) {
-        Case.nextCriminalID = nextCriminalID;
     }
 
     public String getDescription() {
@@ -90,10 +79,12 @@ public class Case {
         return lastUpdateDate;
     }
 
-    public String getCrimeType() {
+    public String getCrimeTypeString() {
+        return crimeType.toString();
+    }
+    public CrimeType getCrimeType(){
         return crimeType;
     }
-
     public int getDepartmentID() {
         return departmentID;
     }
@@ -116,17 +107,13 @@ public class Case {
 
     public void editCaseDetails(String newDescription, String newCrimeType, int newDepartmentID) {
         this.description = newDescription;
-        this.crimeType = newCrimeType;
+        this.crimeType = CrimeType.valueOf(newCrimeType.toUpperCase());
         this.departmentID = newDepartmentID;
         this.lastUpdateDate = LocalDate.now();
     }
     // for the adding of criminals
-//    public void addCriminal(Criminal criminal) {
-//        criminals.add(criminal);
-//        criminalUsedIds.put(criminal.getId(), true);
-//    }
-//    public Boolean isCriminalUsed(String criminalId) {
-//        return criminalUsedIds.containsKey(criminalId);
-//    }
+    public void addCriminal(Criminal criminal) {
+        criminals.add(criminal);
+    }
 }
 

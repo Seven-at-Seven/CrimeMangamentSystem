@@ -16,12 +16,15 @@ public class Criminal extends Person {
     private String psychologicalProfile;
     private Map<Crime, Integer> crimeStatistics;
     private ArrayList<Crime> crimes;
+    private static int id = 6;
 
-    public Criminal(String firstName, String lastName, String id, String currentLocation,
+    public Criminal(String firstName, String lastName, String currentLocation,
                     String psychologicalProfile) {
-        super(firstName, lastName, id);
+        super(firstName, lastName, String.valueOf(id));
+        id++;
         this.currentLocation = currentLocation;
         this.psychologicalProfile = psychologicalProfile;
+        this.crimes = new ArrayList<>();
         crimeStatistics = new HashMap<>();
     }
 

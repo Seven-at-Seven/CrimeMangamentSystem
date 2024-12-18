@@ -29,7 +29,7 @@ public class CaseDisplayController {
         descriptionLabel.setText(caseToDisplay.getDescription());
         startDateLabel.setText(caseToDisplay.getStartDate().toString());
         lastUpdateDateLabel.setText(caseToDisplay.getLastUpdateDate().toString());
-        crimeTypeLabel.setText(caseToDisplay.getCrimeType());
+        crimeTypeLabel.setText(caseToDisplay.getCrimeTypeString());
         departmentIdLabel.setText(String.valueOf(caseToDisplay.getDepartmentID()));
         officersIdLabel.setText(caseToDisplay.getOfficersIds().toString());
         criminalsIdLabel.setText(caseToDisplay.getCriminalsIds().toString());

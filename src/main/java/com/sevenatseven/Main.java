@@ -49,28 +49,28 @@ public void stop() {
 }
     public static void main(String[] args) {
         launch(args);
-        // debug
-        System.out.println("Admins: ");
-        ArrayList<Admin> admins = Shared.getStation().getAdmins();
-        for(Admin admin : admins) {
-            System.out.println(admin.getName());
-        }
-        System.out.println("Deps: ");
-        ArrayList<Department> departments = Shared.getStation().getDepartments();
-        for(Department department : departments){
-            System.out.println("Officers of dep" + department.getId());
-            ArrayList<PoliceOfficer> officers = department.getOfficers();
-            for (PoliceOfficer officer : officers){
-                System.out.println(officer.getName());
-            }
-            System.out.println("Cases of dep" + department.getId());
-            ArrayList<com.sevenatseven.mainEntities.Case> cases = department.getCases();
-            for (com.sevenatseven.mainEntities.Case crimeCase : cases){
-                System.out.println(crimeCase.getDescription());
-                for(Criminal criminal : crimeCase.getCriminals()){
-                    System.out.println(criminal.getDangerLevel());
-                }
-            }
-        }
+        // debug and display
+//        System.out.println("Admins: ");
+//        ArrayList<Admin> admins = Shared.getStation().getAdmins();
+//        for(Admin admin : admins) {
+//            System.out.println(admin.getName());
+//        }
+//        System.out.println("Deps: ");
+//        ArrayList<Department> departments = Shared.getStation().getDepartments();
+//        for(Department department : departments){
+//            System.out.println("Officers of dep" + department.getId());
+//            ArrayList<PoliceOfficer> officers = department.getOfficers();
+//            for (PoliceOfficer officer : officers){
+//                System.out.println(officer.getName());
+//            }
+//            System.out.println("Cases of dep" + department.getId());
+//            ArrayList<com.sevenatseven.mainEntities.Case> cases = department.getCases();
+//            for (com.sevenatseven.mainEntities.Case crimeCase : cases){
+//                System.out.println(crimeCase.getDescription());
+//                for(Criminal criminal : crimeCase.getCriminals()){
+//                    System.out.println(criminal.getDangerLevel());
+//                }
+//            }
+//        }
     }
 }

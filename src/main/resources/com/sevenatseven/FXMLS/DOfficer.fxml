@@ -1,37 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="656.0" prefWidth="901.0" stylesheets="@../styles/components/OfficerStyle.css,@../styles/components/green-button.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevenatseven.controllers.offiecer.util.display.DOfficerController">
-   <VBox alignment="TOP_CENTER" prefHeight="656.0" prefWidth="768.0" spacing="20.0" styleClass="main-container">
-      <Label fx:id="welcomeLabel" prefHeight="82.0" prefWidth="418.0" text="Welcome Officer ">
-         <font>
-            <Font size="28.0" />
-         </font>
-         <padding>
-            <Insets top="30.0" />
-         </padding>
-      </Label>
-      <VBox alignment="CENTER_LEFT" spacing="10">
-         <Label fx:id="rankLabel" text="Rank: " />
-         <Label fx:id="emailLabel" text="Email: " />
-         <Label fx:id="phoneLabel" text="Phone: " />
-         <Label fx:id="salaryLabel" text="Salary: " />
-      </VBox>
-      <HBox alignment="CENTER" prefHeight="95.0" prefWidth="716.0" spacing="100.0">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevenatseven.controllers.offiecer.util.display.DOfficerController">
+   <children>
+      <HBox prefHeight="189.0" prefWidth="932.0">
          <children>
-            <Button onAction="#displayCriminals" prefHeight="46.0" prefWidth="178.0" styleClass="button" text=" Criminals" />
-            <Button onAction="#displayCases" prefHeight="46.0" prefWidth="160.0" styleClass="button" text=" Cases" />
+            <Label prefHeight="110.0" prefWidth="540.0" text="Welcome , Sir" textAlignment="RIGHT">
+               <font>
+                  <Font size="48.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="45.0" top="20.0" />
+               </HBox.margin>
+            </Label>
          </children>
-         <VBox.margin>
-            <Insets top="350.0" />
-         </VBox.margin>
       </HBox>
-   </VBox>
+      <VBox alignment="CENTER" prefHeight="597.0" prefWidth="932.0" spacing="50.0">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <children>
+            <Button mnemonicParsing="false" onAction="#goToProfile" prefHeight="18.0" prefWidth="153.0" stylesheets="@../styles/components/green-button.css" text="Profile">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goToCases" prefHeight="18.0" prefWidth="153.0" stylesheets="@../styles/components/green-button.css" text="Cases">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goToCriminals" prefHeight="18.0" prefWidth="153.0" text="Criminals">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <stylesheets>
+                  <URL value="@../styles/components/OfficerStyle.css" />
+                  <URL value="@../styles/components/green-button.css" />
+               </stylesheets>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
 </VBox>
